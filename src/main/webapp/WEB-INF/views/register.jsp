@@ -20,43 +20,43 @@
     </label>
     <label>
         <span hidden>비밀번호 재입력</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호 재입력">
+        <input maxlength="128" name="passwordCheck" type="password" property="비밀번호 재입력">
     </label>
     <label>
         <span hidden>이름</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="10" name="name" type="text" property="이름">
     </label>
     <label>
         <span hidden>중간이름</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="10" name="middleName" type="text" property="중간이름">
     </label>
     <label>
         <span hidden>이름(성)</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="10" name="nameLast" type="text" property="비밀번호">
     </label>
     <label>
         <span hidden>연락처</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="3" name="contactFirst" type="number" property="비밀번호">
     </label>
     <label>
         <span hidden>연락처(중간)</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="4" name="contactSecond" type="number" property="연락처(중간)">
     </label>
     <label>
         <span hidden>연락처(끝)</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="4" name="contactThird" type="number" property="연락처(끝)">
     </label>
     <label>
         <span hidden>우편번호</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="5" name="addressPost" type="password" property="우편번호">
     </label>
     <label>
         <span hidden>주소</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="100" name="addressPrimary" type="password" property="주소">
     </label>
     <label>
         <span hidden>상세 주소</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="100" name="addressSecondary" type="password" property="상세 주소">
     </label>
 </form>
 <input type="submit" value="회원가입">
