@@ -12,7 +12,7 @@
 <form method="post">
     <label>
         <span hidden>이메일</span>
-        <input autofocus maxlength="10" name="email" type="email" property="이메일">
+        <input autofocus maxlength="50" name="email" type="email" property="이메일">
     </label>
     <label>
         <span hidden>비밀번호</span>
