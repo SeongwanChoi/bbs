@@ -1,5 +1,7 @@
 package dev.bbs.study.csw.vos;
 
+import dev.bbs.study.csw.enums.RegisterResult;
+
 public class RegisterVo {
     private final String email;
     private final String password;
@@ -14,7 +16,11 @@ public class RegisterVo {
     private final String addressPrimary;
     private final String addressSecondary;
 
-    public RegisterVo(String email, String password, String nickname, String nameFirst, String nameOptional, String nameLast, String contactFirst, String contactSecond, String contactThird, String addressPost, String addressPrimary, String addressSecondary) {
+    private RegisterResult result;
+
+    public RegisterVo(String email, String password, String nickname, String nameFirst, String nameOptional,
+                      String nameLast, String contactFirst, String contactSecond, String contactThird, String addressPost,
+                      String addressPrimary, String addressSecondary) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -75,5 +81,13 @@ public class RegisterVo {
 
     public String getAddressSecondary() {
         return addressSecondary;
+    }
+
+    public RegisterResult getResult() {
+        return result;
+    }
+
+    public void setResult(RegisterResult result) {
+        this.result = result;
     }
 }

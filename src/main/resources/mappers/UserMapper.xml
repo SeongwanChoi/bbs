@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.bbs.study.csw.models.IUserModel">
+    <insert id="insertUser" parameterType="dev.bbs.study.csw.vos.RegisterVo">
+        INSERT INTO `git_bbs`.`users`(`email`, `password`, nickname, `name_first`, `name_optional`, `name_last`,
+                                      `contact_first`, `contact_second`, `contact_third`, `address_post`,
+                                      `address_primary`, `address_secondary`)
+        VALUES (#{email}, #{hashedPassword}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},
+                #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPost},
+                #{addressPrimary}, #{addressSecondary})
+    </insert>
+
+    <select id="selectEmailCount">
+        SELECT COUNT(`index`)
+        FROM `git_bbs`.`users`
+        WHERE `email` = #{email}
+    </select>
+
+    <select id="selectNicknameCount">
+        SELECT COUNT(`index`)
+        FROM `git_bbs`.`users`
+        WHERE `nickname` = #{nickname}
+    </select>
+
+    <select id="selectContactCount">
+        SELECT COUNT(`index`)
+        FROM `git_bbs`.`users`
+        WHERE `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
+    </select>
+
+</mapper>

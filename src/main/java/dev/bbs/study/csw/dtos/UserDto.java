@@ -8,31 +8,33 @@ public class UserDto {
     private final String email;
     private final String password;
     private final String nickname;
-    private final String nameF;
-    private final String nameO;
-    private final String nameL;
-    private final String contactF;
-    private final String contactS;
-    private final String contactT;
+    private final String nameFirst;
+    private final String nameOptional;
+    private final String nameLast;
+    private final String contactFirst;
+    private final String contactSecond;
+    private final String contactThird;
     private final String addressPost;
-    private final String addressPri;
-    private final String addressSecon;
+    private final String addressPrimary;
+    private final String addressSecondary;
 
-    public UserDto(int index, String email, String password, String nickname, String nameF, String nameO, String nameL,
-                   String contactF, String contactS, String contactT, String addressPost, String addressPri, String addressSecon) {
+    public UserDto(int index, String email, String password, String nickname,
+                   String nameFirst, String nameOptional, String nameLast,
+                   String contactFirst, String contactSecond, String contactThird,
+                   String addressPost, String addressPrimary, String addressSecondary) {
         this.index = index;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
-        this.nameF = nameF;
-        this.nameO = nameO;
-        this.nameL = nameL;
-        this.contactF = contactF;
-        this.contactS = contactS;
-        this.contactT = contactT;
+        this.nameFirst = nameFirst;
+        this.nameOptional = nameOptional;
+        this.nameLast = nameLast;
+        this.contactFirst = contactFirst;
+        this.contactSecond = contactSecond;
+        this.contactThird = contactThird;
         this.addressPost = addressPost;
-        this.addressPri = addressPri;
-        this.addressSecon = addressSecon;
+        this.addressPrimary = addressPrimary;
+        this.addressSecondary = addressSecondary;
     }
 
     public static String getNAME() {
@@ -55,39 +57,39 @@ public class UserDto {
         return nickname;
     }
 
-    public String getNameF() {
-        return nameF;
+    public String getNameFirst() {
+        return nameFirst;
     }
 
-    public String getNameO() {
-        return nameO;
+    public String getNameOptional() {
+        return nameOptional;
     }
 
-    public String getNameL() {
-        return nameL;
+    public String getNameLast() {
+        return nameLast;
     }
 
-    public String getContactF() {
-        return contactF;
+    public String getContactFirst() {
+        return contactFirst;
     }
 
-    public String getContactS() {
-        return contactS;
+    public String getContactSecond() {
+        return contactSecond;
     }
 
-    public String getContactT() {
-        return contactT;
+    public String getContactThird() {
+        return contactThird;
     }
 
     public String getAddressPost() {
         return addressPost;
     }
 
-    public String getAddressPri() {
-        return addressPri;
+    public String getAddressPrimary() {
+        return addressPrimary;
     }
 
-    public String getAddressSecon() {
-        return addressSecon;
+    public String getAddressSecondary() {
+        return addressSecondary;
     }
 }

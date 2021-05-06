@@ -1,11 +1,11 @@
-package dev.bbs.study.csw.mappers;
+package dev.bbs.study.csw.models;
 
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface IUserMapper {
+public interface IUserModel {
     int selectEmailCount(@Param("email") String email);
 
     int selectNicknameCount(@Param("nickname") String nickname);
