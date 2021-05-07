@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@RequestMapping(value = "/user/")
+@RequestMapping(value = "/user")
 @SessionAttributes(UserDto.NAME)
 public class UserController {
     private final UserService userService;

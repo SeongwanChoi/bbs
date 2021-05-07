@@ -11,8 +11,10 @@
 <body>
 <form>
 회원가입에 성공했습니다.
+    <br>
+    <a href="login.jsp">로그인하러 가기</a>
 </form>
-<input type="submit" value="로그인하러가기">
+
 </body>
 </html>
 

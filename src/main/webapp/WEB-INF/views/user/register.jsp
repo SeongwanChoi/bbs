@@ -11,7 +11,7 @@
     <script src="/WEB-INF/resource/scripts/user/register.js/resource/scripts/register.js"></script>
 </head>
 <body>
-<form id="register-form" method="post">
+<form action="/user/register" id="register-form" method="post">
     <label>
         <span hidden>이메일</span>
         <input autofocus maxlength="50" name="email" type="email" placeholder="이메일">
@@ -34,11 +34,11 @@
     <br>
     <label>
         <span hidden>이름</span>
-        <input maxlength="10" name="name" type="text" placeholder="이름">
+        <input maxlength="10" name="nameFirst" type="text" placeholder="이름">
     </label>
     <label>
         <span hidden>중간이름</span>
-        <input maxlength="10" name="middleName" type="text" placeholder="중간이름">
+        <input maxlength="10" name="nameOptional" type="text" placeholder="중간이름">
     </label>
     <label>
         <span hidden>이름(성)</span>
@@ -73,8 +73,8 @@
         <span hidden>상세 주소</span>
         <input maxlength="100" name="addressSecondary" type="password" placeholder="상세 주소">
     </label>
+    <input type="submit" value="회원가입">
 </form>
-<input type="submit" value="회원가입">
 </body>
 </html>
 

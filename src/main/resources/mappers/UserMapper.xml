@@ -6,24 +6,24 @@
         INSERT INTO `git_bbs`.`users`(`email`, `password`, nickname, `name_first`, `name_optional`, `name_last`,
                                       `contact_first`, `contact_second`, `contact_third`, `address_post`,
                                       `address_primary`, `address_secondary`)
-        VALUES (#{email}, #{hashedPassword}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},
+        VALUES (#{email}, #{password}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},
                 #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPost},
                 #{addressPrimary}, #{addressSecondary})
     </insert>
 
-    <select id="selectEmailCount">
+    <select id="selectEmailCount" resultType="_int">
         SELECT COUNT(`index`)
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
     </select>
 
-    <select id="selectNicknameCount">
+    <select id="selectNicknameCount" resultType="_int">
         SELECT COUNT(`index`)
         FROM `git_bbs`.`users`
         WHERE `nickname` = #{nickname}
     </select>
 
-    <select id="selectContactCount">
+    <select id="selectContactCount" resultType="_int">
         SELECT COUNT(`index`)
         FROM `git_bbs`.`users`
         WHERE `contact_first` = #{contactFirst}
