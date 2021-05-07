@@ -1,5 +1,7 @@
 package dev.bbs.study.csw.models;
 
+import dev.bbs.study.csw.dtos.UserDto;
+import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +18,6 @@ public interface IUserModel {
             @Param("contactThird") String contactThird);
 
     void insertUser(RegisterVo registerVo);
+
+    UserDto selectUser(LoginVo loginVo);
 }

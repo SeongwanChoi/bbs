@@ -31,4 +31,5 @@
           AND `contact_third` = #{contactThird}
     </select>
 
+    <select id="selectUser"></select>
 </mapper>
