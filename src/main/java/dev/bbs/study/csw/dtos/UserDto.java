@@ -17,11 +17,12 @@ public class UserDto {
     private final String addressPost;
     private final String addressPrimary;
     private final String addressSecondary;
+    private final int level;
 
     public UserDto(int index, String email, String password, String nickname,
                    String nameFirst, String nameOptional, String nameLast,
                    String contactFirst, String contactSecond, String contactThird,
-                   String addressPost, String addressPrimary, String addressSecondary) {
+                   String addressPost, String addressPrimary, String addressSecondary, int level) {
         this.index = index;
         this.email = email;
         this.password = password;
@@ -35,6 +36,7 @@ public class UserDto {
         this.addressPost = addressPost;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
+        this.level = level;
     }
 
     public static String getNAME() {
@@ -91,5 +93,9 @@ public class UserDto {
 
     public String getAddressSecondary() {
         return addressSecondary;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

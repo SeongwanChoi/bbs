@@ -24,8 +24,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ModelAttribute(UserDto.NAME)
+    private UserDto userDto() {
+        return null;
+    }
+
     @RequestMapping(
-            value = "/user/",
+            value = "/user",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public String loginGet() {
@@ -33,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/user/",
+            value = "/user",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_HTML_VALUE)
     public String loginPost() {
@@ -41,7 +46,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/register/",
+            value = "/register",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public String registerGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
@@ -52,7 +57,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/register/",
+            value = "/register",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_HTML_VALUE)
     public String registerPost(
@@ -70,4 +75,6 @@ public class UserController {
             return "user/register";
         }
     }
+
+
 }

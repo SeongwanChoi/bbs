@@ -7,56 +7,71 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/WEB-INF/resource/scripts/user/register.js/resource/scripts/register.js"></script>
 </head>
 <body>
-<form method="post">
+<form id="register-form" method="post">
     <label>
         <span hidden>이메일</span>
-        <input autofocus maxlength="50" name="email" type="email" property="이메일">
+        <input autofocus maxlength="50" name="email" type="email" placeholder="이메일">
     </label>
+    <br>
     <label>
         <span hidden>비밀번호</span>
-        <input maxlength="128" name="password" type="password" property="비밀번호">
+        <input maxlength="128" name="password" type="password" placeholder="비밀번호">
     </label>
+    <br>
     <label>
         <span hidden>비밀번호 재입력</span>
-        <input maxlength="128" name="passwordCheck" type="password" property="비밀번호 재입력">
+        <input maxlength="128" name="passwordCheck" type="password" placeholder="비밀번호 재입력">
     </label>
+    <br>
+    <label>
+        <span hidden>닉네임</span>
+        <input maxlength="10" name="nickname" type="text" placeholder="닉네임">
+    </label>
+    <br>
     <label>
         <span hidden>이름</span>
-        <input maxlength="10" name="name" type="text" property="이름">
+        <input maxlength="10" name="name" type="text" placeholder="이름">
     </label>
     <label>
         <span hidden>중간이름</span>
-        <input maxlength="10" name="middleName" type="text" property="중간이름">
+        <input maxlength="10" name="middleName" type="text" placeholder="중간이름">
     </label>
     <label>
         <span hidden>이름(성)</span>
-        <input maxlength="10" name="nameLast" type="text" property="비밀번호">
+        <input maxlength="10" name="nameLast" type="text" placeholder="이름(성)">
     </label>
+    <br>
     <label>
         <span hidden>연락처</span>
-        <input maxlength="3" name="contactFirst" type="number" property="비밀번호">
+        <input maxlength="3" name="contactFirst" type="number" placeholder="연락처">
     </label>
     <label>
         <span hidden>연락처(중간)</span>
-        <input maxlength="4" name="contactSecond" type="number" property="연락처(중간)">
+        <input maxlength="4" name="contactSecond" type="number" placeholder="연락처(중간)">
     </label>
     <label>
         <span hidden>연락처(끝)</span>
-        <input maxlength="4" name="contactThird" type="number" property="연락처(끝)">
+        <input maxlength="4" name="contactThird" type="number" placeholder="연락처(끝)">
     </label>
+    <br>
     <label>
         <span hidden>우편번호</span>
-        <input maxlength="5" name="addressPost" type="password" property="우편번호">
+        <input maxlength="5" name="addressPost" type="password" placeholder="우편번호">
     </label>
+    <input name="addressPostButton" type="button" value="우편번호 찾기">
+    <br>
     <label>
         <span hidden>주소</span>
-        <input maxlength="100" name="addressPrimary" type="password" property="주소">
+        <input maxlength="100" name="addressPrimary" type="password" placeholder="주소">
     </label>
+    <br>
     <label>
         <span hidden>상세 주소</span>
-        <input maxlength="100" name="addressSecondary" type="password" property="상세 주소">
+        <input maxlength="100" name="addressSecondary" type="password" placeholder="상세 주소">
     </label>
 </form>
 <input type="submit" value="회원가입">
