@@ -12,11 +12,6 @@ public interface IUserModel {
 
     int selectNicknameCount(@Param("nickname") String nickname);
 
-    int selectContactCount(
-            @Param("contactFirst") String contactFirst,
-            @Param("contactSecond") String contactSecond,
-            @Param("contactThird") String contactThird);
-
     void insertUser(RegisterVo registerVo);
 
     UserDto selectUser(LoginVo loginVo);

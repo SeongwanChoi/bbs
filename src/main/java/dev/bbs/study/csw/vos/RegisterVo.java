@@ -15,12 +15,15 @@ public class RegisterVo {
     private final String addressPost;
     private final String addressPrimary;
     private final String addressSecondary;
+    private final String field;
+    private final String value;
 
     private RegisterResult result;
 
-    public RegisterVo(String email, String password, String nickname, String nameFirst, String nameOptional,
-                      String nameLast, String contactFirst, String contactSecond, String contactThird, String addressPost,
-                      String addressPrimary, String addressSecondary) {
+    public RegisterVo(String email, String password, String nickname, String nameFirst,
+                      String nameOptional, String nameLast, String contactFirst, String contactSecond,
+                      String contactThird, String addressPost, String addressPrimary,
+                      String addressSecondary, String field, String value) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -33,6 +36,8 @@ public class RegisterVo {
         this.addressPost = addressPost;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
+        this.field = field;
+        this.value = value;
     }
 
     public String getEmail() {
@@ -81,6 +86,14 @@ public class RegisterVo {
 
     public String getAddressSecondary() {
         return addressSecondary;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     public RegisterResult getResult() {

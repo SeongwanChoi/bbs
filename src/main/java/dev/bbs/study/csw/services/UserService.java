@@ -21,22 +21,22 @@ public class UserService {
     }
 
     public void register(RegisterVo registerVo) {
-        if (this.userModel.selectEmailCount(registerVo.getEmail()) > 0) {
+        if (this.getEmailCount(registerVo.getEmail()) > 0) {
             registerVo.setResult(RegisterResult.DUPLICATE_EMAIL);
             return;
         }
-        if (this.userModel.selectNicknameCount(registerVo.getNickname()) > 0) {
+        if (this.getNicknameCount(registerVo.getNickname()) > 0) {
             registerVo.setResult(RegisterResult.DUPLICATE_NICKNAME);
-            return;
-        }
-        if (this.userModel.selectContactCount(
-                registerVo.getContactFirst(),
-                registerVo.getContactSecond(),
-                registerVo.getContactThird())> 0) {
-            registerVo.setResult(RegisterResult.DUPLICATE_CONTACT);
             return;
         }
         this.userModel.insertUser(registerVo);
         registerVo.setResult(RegisterResult.SUCCESS);
+    }
+
+    public int getEmailCount(String email) {
+        return this.userModel.selectEmailCount(email);
+    }
+    public int getNicknameCount(String nickname){
+        return this.userModel.selectNicknameCount(nickname);
     }
 }

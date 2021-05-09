@@ -23,13 +23,6 @@
         WHERE `nickname` = #{nickname}
     </select>
 
-    <select id="selectContactCount" resultType="_int">
-        SELECT COUNT(`index`)
-        FROM `git_bbs`.`users`
-        WHERE `contact_first` = #{contactFirst}
-          AND `contact_second` = #{contactSecond}
-          AND `contact_third` = #{contactThird}
-    </select>
 
     <select id="selectUser">
         SELECT `index` AS `index`,

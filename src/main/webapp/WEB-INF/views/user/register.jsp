@@ -15,6 +15,7 @@
     <label>
         <span hidden>이메일</span>
         <input autofocus maxlength="50" name="email" type="email" placeholder="이메일">
+        <span class="warning" rel="email-warning">해당 이메일은 이미 사용 중입니다.</span>
     </label>
     <br>
     <label>
@@ -30,6 +31,7 @@
     <label>
         <span hidden>닉네임</span>
         <input maxlength="10" name="nickname" type="text" placeholder="닉네임">
+        <span class="warning" rel="nickname-warning">해당 닉네임은 이미 사용 중입니다.</span>
     </label>
     <br>
     <label>
@@ -73,6 +75,7 @@
         <span hidden>상세 주소</span>
         <input maxlength="100" name="addressSecondary" type="password" placeholder="상세 주소">
     </label>
+    <br>
     <input type="submit" value="회원가입">
 </form>
 </body>
