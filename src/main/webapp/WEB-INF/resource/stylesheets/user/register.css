@@ -1,10 +1,10 @@
-body.register > main > div > form.warning {
+body.register> form .warning {
     color: red;
     display: none;
     margin-right: 1rem;
 }
 
-body.register > main > div > form.warning.visible {
+body.register > form .warning.visible {
     display: inline-block;
 }
 
