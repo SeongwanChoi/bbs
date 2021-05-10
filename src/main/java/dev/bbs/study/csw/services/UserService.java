@@ -36,6 +36,7 @@ public class UserService {
     public int getEmailCount(String email) {
         return this.userModel.selectEmailCount(email);
     }
+
     public int getNicknameCount(String nickname){
         return this.userModel.selectNicknameCount(nickname);
     }

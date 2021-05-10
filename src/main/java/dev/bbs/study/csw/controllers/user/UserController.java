@@ -71,7 +71,7 @@ public class UserController {
         if (registerVo.getResult() == RegisterResult.SUCCESS) {
             return "user/register.success";
         } else {
-            model.addAttribute("vo", registerVo);
+            model.addAttribute("registerVo", registerVo);
             return "user/register";
         }
     }

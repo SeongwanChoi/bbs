@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"  trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
+<%@ page import="dev.bbs.study.csw.enums.RegisterResult" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -7,15 +9,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
+    <link rel="stylesheet" href="/resource/stylesheets/user/register.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/WEB-INF/resource/scripts/user/register.js/resource/scripts/register.js"></script>
+    <script src="/resource/scripts/class.ajax.js"></script>
+    <script src="/resource/scripts/user/register.js"></script>
 </head>
-<body>
+<body class="register">
 <form action="/user/register" id="register-form" method="post">
     <label>
         <span hidden>이메일</span>
-        <input autofocus maxlength="50" name="email" type="email" placeholder="이메일">
-        <span class="warning" rel="email-warning">해당 이메일은 이미 사용 중입니다.</span>
+        <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${registerVo.email}">
+        <span class="warning" rel="email-warning" >해당 이메일은 이미 사용 중입니다.</span>
     </label>
     <br>
     <label>
@@ -30,7 +34,7 @@
     <br>
     <label>
         <span hidden>닉네임</span>
-        <input maxlength="10" name="nickname" type="text" placeholder="닉네임">
+        <input maxlength="10" name="nickname" type="text" placeholder="닉네임" value="${registerVo.nickname}">
         <span class="warning" rel="nickname-warning">해당 닉네임은 이미 사용 중입니다.</span>
     </label>
     <br>
