@@ -16,11 +16,72 @@ public class UserService {
         this.userModel = userModel;
     }
 
+    private static class Regex {
+        public static final String EMAIL = "^(?=.{8,50}$)([0-9a-z]([_]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
+        public static final String NICKNAME = "^([0-9a-zA-Z가-힣]{2,10})$";
+        public static final String NAME_FIRST = "^([가-힣]{1,10})$";
+        public static final String NAME_OPTIONAL = "^([가-힣]{0,10})$";
+        public static final String NAME_LAST = "^([가-힣]{1,10})$";
+        public static final String CONTACT_FIRST = "^(010|070)$";
+        public static final String CONTACT_SECOND = "^([0-9]{4})$";
+        public static final String CONTACT_THIRD = "^([0-9]{4})$";
+        public static final String ADDRESS_POST = "^([0-9]{5})$";
+        public static final String ADDRESS_PRIMARY = "^([0-9a-zA-Z가-힣\\- ]{10,100})$";
+        public static final String ADDRESS_SECONDARY = "^([0-9a-zA-Z가-힣\\- ]{0,100})$";
+    }
+
+    public static boolean checkEmail(String email) {
+        return email.matches(Regex.EMAIL);
+    }
+    public static boolean checkNickname(String nickname) {
+        return nickname.matches(Regex.NICKNAME);
+    }
+    public static boolean checkNameFirst(String nameFirst) {
+        return nameFirst.matches(Regex.NAME_FIRST);
+    }
+    public static boolean checkNameOptional(String nameOptional) {
+        return nameOptional.matches(Regex.NAME_OPTIONAL);
+    }
+    public static boolean checkNameLast(String nameLast) {
+        return nameLast.matches(Regex.NAME_LAST);
+    }
+    public static boolean checkContactFirst(String contactFirst) {
+        return contactFirst.matches(Regex.CONTACT_FIRST);
+    }
+    public static boolean checkContactSecond(String contactSecond) {
+        return contactSecond.matches(Regex.CONTACT_SECOND);
+    }
+    public static boolean checkContactThird(String contactThird) {
+        return contactThird.matches(Regex.CONTACT_THIRD);
+    }
+    public static boolean checkAddressPost(String addressPost) {
+        return addressPost.matches(Regex.ADDRESS_POST);
+    }
+    public static boolean checkAddressPrimary(String addressPrimary) {
+        return addressPrimary.matches(Regex.ADDRESS_PRIMARY);
+    }
+    public static boolean checkAddressSecondary(String addressSecondary) {
+        return addressSecondary.matches(Regex.ADDRESS_SECONDARY);
+    }
+
     public void login(LoginVo loginVo) {
 
     }
 
     public void register(RegisterVo registerVo) {
+        if (!UserService.checkEmail(registerVo.getEmail()) ||
+                !UserService.checkNickname(registerVo.getNickname()) ||
+                !UserService.checkNameFirst(registerVo.getNameFirst()) ||
+                !UserService.checkNameLast(registerVo.getNameLast()) ||
+                !UserService.checkContactFirst(registerVo.getContactFirst()) ||
+                !UserService.checkContactSecond(registerVo.getContactSecond()) ||
+                !UserService.checkContactThird(registerVo.getContactThird()) ||
+                !UserService.checkAddressPost(registerVo.getAddressPost()) ||
+                !UserService.checkAddressPrimary(registerVo.getAddressPrimary()) ||
+                !UserService.checkAddressSecondary(registerVo.getAddressSecondary())) {
+            registerVo.setResult(RegisterResult.FAILURE);
+            return;
+        }
         if (this.getEmailCount(registerVo.getEmail()) > 0) {
             registerVo.setResult(RegisterResult.DUPLICATE_EMAIL);
             return;

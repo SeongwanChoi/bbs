@@ -43,6 +43,70 @@ window.addEventListener('DOMContentLoaded', () => {
         Ajax.request('POST', '/apis/register/count', callback, ()=>{}, formData);
     });
 
+
+    registerForm.onsubmit = () => {
+        const emailRegex = new RegExp('^(?=.{8,50}$)([0-9a-z]([_]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$');
+        const passwordRegex = new RegExp('^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{4,100})$');
+        const nicknameRegex = new RegExp('^([0-9a-zA-Z가-힣]{2,10})$');
+        const nameFirstRegex = new RegExp('^([가-힣]{1,10})$');
+        const nameOptionalRegex = new RegExp('^([가-힣]{0,10})$');
+        const nameLastRegex = new RegExp('^([가-힣]{1,10})$');
+        const contactFirstRegex = new RegExp('^(010|070)$');
+        const contactSecondRegex = new RegExp('^([0-9]{4})$');
+        const contactThirdRegex = new RegExp('^([0-9]{4})$');
+        const addressPrimaryRegex = new RegExp('^([0-9a-zA-Z가-힣\\- ]{10,100})$');
+        const addressSecondaryRegex = new RegExp('^([0-9a-zA-Z가-힣\\- ]{0,100})$');
+        if (!emailRegex.text(registerForm['email'].value)) {
+            alert('올바른 이메일을 입력해주세요.');
+            registerForm['email'].focus();
+            return false;
+        }
+        if (!passwordRegex.text(registerForm['password'].value)) {
+            alert('올바른 비밀번호를 입력해주세요.');
+            registerForm['password'].focus();
+            return false;
+        }
+        if (!nicknameRegex.text(registerForm['nickname'].value)) {
+            alert('올바른 닉네임을 입력해주세요.');
+            registerForm['nickname'].focus();
+            return false;
+        }
+        if (!nameFirstRegex.text(registerForm['nameFirst'].value)) {
+            alert('올바른 이름(성 제외)을 적어주세요.');
+            registerForm['nameFirst'].focus();
+            return false;
+        }
+        if (!nameLastRegex.text(registerForm['nameLast'].value)) {
+            alert('올바른 이름(성)을 적어주세요.');
+            registerForm['nameLast'].focus();
+            return false;
+        }
+        if (!contactFirstRegex.text(registerForm['contactFirst'].value)) {
+            alert('올바른 연락처를 입력해주세요.');
+            registerForm['contactFirst'].focus();
+            return false;
+        }
+        if (!contactSecondRegex.text(registerForm['contactSecond'].value)) {
+            alert('올바른 연락처를 입력해주세요.');
+            registerForm['contactSecond'].focus();
+            return false;
+        }
+        if (!contactThirdRegex.text(registerForm['contactThird'].value)) {
+            alert('올바른 연락처를 입력해주세요.');
+            registerForm['contactThird'].focus();
+            return false;
+        }
+        if (!addressPrimaryRegex.text(registerForm['addressPrimary'].value)) {
+            alert('올바른 주소를 입력해주세요.');
+            registerForm['addressPrimary'].focus();
+            return false;
+        }
+        if (!addressSecondaryRegex.text(registerForm['addressSecondary'].value)) {
+            alert('올바른 주소를 입력해주세요.');
+            registerForm['addressSecondary'].focus();
+            return false;
+        }
+        }
     if (registerForm['password'].value !== registerForm['passwordCheck'].value) {
         alert('비밀번호가 서로 일치하지 않습니다.');
         registerForm['passwordCheck'].focus();

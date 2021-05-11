@@ -23,7 +23,7 @@
     <br>
     <label>
         <span hidden>비밀번호</span>
-        <input maxlength="128" name="password" type="password" placeholder="비밀번호">
+        <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${registerVo.password}">
     </label>
     <br>
     <label>
@@ -39,44 +39,44 @@
     <br>
     <label>
         <span hidden>이름</span>
-        <input maxlength="10" name="nameFirst" type="text" placeholder="이름">
+        <input maxlength="10" name="nameFirst" type="text" placeholder="이름" value="${registerVo.nameFirst}">
     </label>
     <label>
         <span hidden>중간이름</span>
-        <input maxlength="10" name="nameOptional" type="text" placeholder="중간이름">
+        <input maxlength="10" name="nameOptional" type="text" placeholder="중간이름"value="${registerVo.nameOptional}">
     </label>
     <label>
         <span hidden>이름(성)</span>
-        <input maxlength="10" name="nameLast" type="text" placeholder="이름(성)">
+        <input maxlength="10" name="nameLast" type="text" placeholder="이름(성)" value="${registerVo.nameLast}">
     </label>
     <br>
     <label>
         <span hidden>연락처</span>
-        <input maxlength="3" name="contactFirst" type="number" placeholder="연락처">
+        <input maxlength="3" name="contactFirst" type="tel" placeholder="연락처" value="${registerVo.contactFirst}">
     </label>
     <label>
         <span hidden>연락처(중간)</span>
-        <input maxlength="4" name="contactSecond" type="number" placeholder="연락처(중간)">
+        <input maxlength="4" name="contactSecond" type="number" placeholder="연락처(중간)" value="${registerVo.contactSecond}">
     </label>
     <label>
         <span hidden>연락처(끝)</span>
-        <input maxlength="4" name="contactThird" type="number" placeholder="연락처(끝)">
+        <input maxlength="4" name="contactThird" type="number" placeholder="연락처(끝)" value="${registerVo.contactThird}">
     </label>
     <br>
     <label>
         <span hidden>우편번호</span>
-        <input maxlength="5" name="addressPost" type="password" placeholder="우편번호">
+        <input maxlength="5" name="addressPost" type="text" readonly value="${registerVo.addressPost}">
     </label>
     <input name="addressPostButton" type="button" value="우편번호 찾기">
     <br>
     <label>
         <span hidden>주소</span>
-        <input maxlength="100" name="addressPrimary" type="password" placeholder="주소">
+        <input maxlength="100" name="addressPrimary" type="text" placeholder="주소" value="${registerVo.addressPrimary}">
     </label>
     <br>
     <label>
         <span hidden>상세 주소</span>
-        <input maxlength="100" name="addressSecondary" type="password" placeholder="상세 주소">
+        <input maxlength="100" name="addressSecondary" type="text" placeholder="상세 주소" value="${registerVo.addressSecondary}">
     </label>
     <br>
     <input type="submit" value="회원가입">
