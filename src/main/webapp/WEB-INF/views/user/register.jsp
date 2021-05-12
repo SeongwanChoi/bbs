@@ -71,7 +71,7 @@
     <br>
     <label>
         <span hidden>주소</span>
-        <input maxlength="100" name="addressPrimary" type="text" placeholder="주소" value="${registerVo.addressPrimary}">
+        <input maxlength="100" name="addressPrimary" type="text" readonly value="${registerVo.addressPrimary}">
     </label>
     <br>
     <label>

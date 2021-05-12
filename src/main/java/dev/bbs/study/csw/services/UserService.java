@@ -54,6 +54,7 @@ public class UserService {
     public static boolean checkContactThird(String contactThird) {
         return contactThird.matches(Regex.CONTACT_THIRD);
     }
+
     public static boolean checkAddressPost(String addressPost) {
         return addressPost.matches(Regex.ADDRESS_POST);
     }
@@ -77,9 +78,21 @@ public class UserService {
                 !UserService.checkContactSecond(registerVo.getContactSecond()) ||
                 !UserService.checkContactThird(registerVo.getContactThird()) ||
                 !UserService.checkAddressPost(registerVo.getAddressPost()) ||
-                !UserService.checkAddressPrimary(registerVo.getAddressPrimary()) ||
-                !UserService.checkAddressSecondary(registerVo.getAddressSecondary())) {
+                !UserService.checkAddressPrimary(registerVo.getAddressPrimary())){
             registerVo.setResult(RegisterResult.FAILURE);
+            return;
+        }
+        if (UserService.checkEmail("") ||
+                UserService.checkNickname("") ||
+                UserService.checkNameFirst("") ||
+                UserService.checkNameLast("") ||
+                UserService.checkContactFirst("") ||
+                UserService.checkContactSecond("") ||
+                UserService.checkContactThird("") ||
+                UserService.checkAddressPost("") ||
+                UserService.checkAddressPrimary("")) {
+            registerVo.setResult(RegisterResult.FAILURE);
+            System.out.println("공백금지");
             return;
         }
         if (this.getEmailCount(registerVo.getEmail()) > 0) {

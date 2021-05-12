@@ -1,6 +1,7 @@
 package dev.bbs.study.csw.vos;
 
 import dev.bbs.study.csw.enums.RegisterResult;
+import dev.bbs.study.csw.util.CryptoUtil;
 
 public class RegisterVo {
     private final String email;
@@ -15,6 +16,8 @@ public class RegisterVo {
     private final String addressPost;
     private final String addressPrimary;
     private final String addressSecondary;
+    private final String address;
+    private final String hashPassword;
 
 
     private RegisterResult result;
@@ -35,7 +38,8 @@ public class RegisterVo {
         this.addressPost = addressPost;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
-
+        this.address = String.format("%s %s %s", addressPost, addressPrimary, addressSecondary);
+        this.hashPassword = CryptoUtil.Sha512.hash(password, null);
     }
 
     public String getEmail() {
@@ -86,6 +90,13 @@ public class RegisterVo {
         return addressSecondary;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getHashPassword() {
+        return hashPassword;
+    }
 
     public RegisterResult getResult() {
         return result;
