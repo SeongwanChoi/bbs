@@ -1,8 +1,10 @@
 package dev.bbs.study.csw.controllers.user;
 
 import dev.bbs.study.csw.dtos.UserDto;
+import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.services.UserService;
+import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,19 +32,35 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/user",
+            value = "/login",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public String loginGet() {
+    public String loginGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
         return "user/login";
     }
 
     @RequestMapping(
-            value = "/user",
+            value = "/login",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_HTML_VALUE)
-    public String loginPost() {
-        return "user/login";
+    public String loginPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            LoginVo loginVo,
+            Model model) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        this.userService.login(loginVo);
+        if (loginVo.getLoginResult() == LoginResult.SUCCESS) {
+            model.addAttribute(UserDto.NAME, loginVo.getUserDto());
+            return "redirect:/";
+        } else {
+            model.addAttribute("vo", loginVo);
+            return "user/login";
+        }
     }
 
     @RequestMapping(

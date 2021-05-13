@@ -1,0 +1,8 @@
+body.login > form .warning {
+    color: red;
+    display: none;
+}
+
+body.login > form .warning.visible {
+    display: block;
+}

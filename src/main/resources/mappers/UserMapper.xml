@@ -6,7 +6,7 @@
         INSERT INTO `git_bbs`.`users`(`email`, `password`, nickname, `name_first`, `name_optional`, `name_last`,
                                       `contact_first`, `contact_second`, `contact_third`, `address_post`,
                                       `address_primary`, `address_secondary`)
-        VALUES (#{email}, #{password}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},
+        VALUES (#{email}, #{hashedPassword}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},
                 #{contactFirst}, #{contactSecond}, #{contactThird}, #{addressPost},
                 #{addressPrimary}, #{addressSecondary})
     </insert>
@@ -24,24 +24,24 @@
     </select>
 
 
-    <select id="selectUser">
-        SELECT `index` AS `index`,
-               `email` AS `email`,
-               `password` AS `password`,
-               `nickname` AS `nickname`,
-               `name_first` AS `nameFirst`,
-               `name_optional` AS `nameOptional`,
-               `name_last` AS `nameLast`,
-               `contact_first` AS `contactFirst`,
-               `contact_second` AS `contactSecond`,
-               `contact_third` AS `contactThird`,
-               `address_post` AS addressPost,
-               `address_primary` AS addressPrimary,
+    <select id="selectUser" parameterType="dev.bbs.study.csw.vos.LoginVo" resultType="dev.bbs.study.csw.dtos.UserDto">
+        SELECT `index`             AS `index`,
+               `email`             AS `email`,
+               `password`          AS `password`,
+               `nickname`          AS `nickname`,
+               `name_first`        AS `nameFirst`,
+               `name_optional`     AS `nameOptional`,
+               `name_last`         AS `nameLast`,
+               `contact_first`     AS `contactFirst`,
+               `contact_second`    AS `contactSecond`,
+               `contact_third`     AS `contactThird`,
+               `address_post`      AS addressPost,
+               `address_primary`   AS addressPrimary,
                `address_secondary` AS addressSecondary,
-               `level` AS `level`
+               `level`             AS `level`
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
-          AND `password` = #{password}
+          AND `password` = #{hashedPassword}
         LIMIT 1
     </select>
 </mapper>

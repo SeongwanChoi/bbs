@@ -16,8 +16,7 @@ public class RegisterVo {
     private final String addressPost;
     private final String addressPrimary;
     private final String addressSecondary;
-    private final String address;
-    private final String hashPassword;
+    private final String hashedPassword;
 
 
     private RegisterResult result;
@@ -38,8 +37,7 @@ public class RegisterVo {
         this.addressPost = addressPost;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
-        this.address = String.format("%s %s %s", addressPost, addressPrimary, addressSecondary);
-        this.hashPassword = CryptoUtil.Sha512.hash(password, null);
+        this.hashedPassword = CryptoUtil.Sha512.hash(password, null);
     }
 
     public String getEmail() {
@@ -90,12 +88,8 @@ public class RegisterVo {
         return addressSecondary;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getHashPassword() {
-        return hashPassword;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
     public RegisterResult getResult() {

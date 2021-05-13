@@ -12,9 +12,8 @@
 <form>
 회원가입에 성공했습니다.
     <br>
-    <a href="login.jsp">로그인하러 가기</a>
+    <a href="login">로그인하러 가기</a>
 </form>
-
 </body>
 </html>
 

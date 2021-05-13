@@ -1,5 +1,7 @@
 package dev.bbs.study.csw.services;
 
+import dev.bbs.study.csw.dtos.UserDto;
+import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.models.IUserModel;
 import dev.bbs.study.csw.vos.LoginVo;
@@ -66,7 +68,21 @@ public class UserService {
     }
 
     public void login(LoginVo loginVo) {
-
+        if (!UserService.checkEmail(loginVo.getEmail())) {
+            loginVo.setLoginResult(LoginResult.FAILURE);
+            return;
+        }
+        UserDto userDto = this.userModel.selectUser(loginVo);
+        if (userDto == null) {
+            loginVo.setLoginResult(LoginResult.FAILURE);
+            return;
+        }
+        if (userDto.getLevel() == 10) {
+            loginVo.setLoginResult(LoginResult.UNAVAILABLE);
+            return;
+        }
+        loginVo.setLoginResult(LoginResult.SUCCESS);
+        loginVo.setUserDto(userDto);
     }
 
     public void register(RegisterVo registerVo) {
@@ -80,19 +96,6 @@ public class UserService {
                 !UserService.checkAddressPost(registerVo.getAddressPost()) ||
                 !UserService.checkAddressPrimary(registerVo.getAddressPrimary())){
             registerVo.setResult(RegisterResult.FAILURE);
-            return;
-        }
-        if (UserService.checkEmail("") ||
-                UserService.checkNickname("") ||
-                UserService.checkNameFirst("") ||
-                UserService.checkNameLast("") ||
-                UserService.checkContactFirst("") ||
-                UserService.checkContactSecond("") ||
-                UserService.checkContactThird("") ||
-                UserService.checkAddressPost("") ||
-                UserService.checkAddressPrimary("")) {
-            registerVo.setResult(RegisterResult.FAILURE);
-            System.out.println("공백금지");
             return;
         }
         if (this.getEmailCount(registerVo.getEmail()) > 0) {

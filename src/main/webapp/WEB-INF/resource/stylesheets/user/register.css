@@ -1,4 +1,4 @@
-body.register> form .warning {
+body.register > form .warning {
     color: red;
     display: none;
     margin-right: 1rem;
