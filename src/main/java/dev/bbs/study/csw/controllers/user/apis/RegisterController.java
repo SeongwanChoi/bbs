@@ -2,7 +2,6 @@ package dev.bbs.study.csw.controllers.user.apis;
 
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.apis.CountVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     private final UserService userService;
 
-    @Autowired
     public RegisterController(UserService userService) {
         this.userService = userService;
     }
