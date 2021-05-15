@@ -6,6 +6,7 @@ import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.models.IUserModel;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.RegisterVo;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,29 +21,26 @@ public class UserService {
 
     private static class Regex {
         public static final String EMAIL = "^(?=.{8,50}$)([0-9a-z]([_]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
+        public static final String PASSWORD = "^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{4,100})$";
         public static final String NICKNAME = "^([0-9a-zA-Z가-힣]{2,10})$";
         public static final String NAME_FIRST = "^([가-힣]{1,10})$";
-        public static final String NAME_OPTIONAL = "^([가-힣]{0,10})$";
         public static final String NAME_LAST = "^([가-힣]{1,10})$";
         public static final String CONTACT_FIRST = "^(010|070)$";
         public static final String CONTACT_SECOND = "^([0-9]{4})$";
         public static final String CONTACT_THIRD = "^([0-9]{4})$";
         public static final String ADDRESS_POST = "^([0-9]{5})$";
         public static final String ADDRESS_PRIMARY = "^([0-9a-zA-Z가-힣\\- ]{10,100})$";
-        public static final String ADDRESS_SECONDARY = "^([0-9a-zA-Z가-힣\\- ]{0,100})$";
     }
 
     public static boolean checkEmail(String email) {
         return email.matches(Regex.EMAIL);
     }
+    public static boolean checkPassword (String password) { return password.matches(Regex.PASSWORD); }
     public static boolean checkNickname(String nickname) {
         return nickname.matches(Regex.NICKNAME);
     }
     public static boolean checkNameFirst(String nameFirst) {
         return nameFirst.matches(Regex.NAME_FIRST);
-    }
-    public static boolean checkNameOptional(String nameOptional) {
-        return nameOptional.matches(Regex.NAME_OPTIONAL);
     }
     public static boolean checkNameLast(String nameLast) {
         return nameLast.matches(Regex.NAME_LAST);
@@ -63,18 +61,16 @@ public class UserService {
     public static boolean checkAddressPrimary(String addressPrimary) {
         return addressPrimary.matches(Regex.ADDRESS_PRIMARY);
     }
-    public static boolean checkAddressSecondary(String addressSecondary) {
-        return addressSecondary.matches(Regex.ADDRESS_SECONDARY);
-    }
 
     public void login(LoginVo loginVo) {
-        if (!UserService.checkEmail(loginVo.getEmail())) {
+        if (!UserService.checkEmail(loginVo.getEmail()) ||
+            !UserService.checkPassword(loginVo.getPassword())) {
             loginVo.setLoginResult(LoginResult.FAILURE);
             return;
         }
         UserDto userDto = this.userModel.selectUser(loginVo);
         if (userDto == null) {
-            loginVo.setLoginResult(LoginResult.FAILURE);
+            loginVo.setLoginResult(LoginResult.NONE);
             return;
         }
         if (userDto.getLevel() == 10) {
@@ -87,6 +83,7 @@ public class UserService {
 
     public void register(RegisterVo registerVo) {
         if (!UserService.checkEmail(registerVo.getEmail()) ||
+                !UserService.checkPassword(registerVo.getPassword()) ||
                 !UserService.checkNickname(registerVo.getNickname()) ||
                 !UserService.checkNameFirst(registerVo.getNameFirst()) ||
                 !UserService.checkNameLast(registerVo.getNameLast()) ||
@@ -117,4 +114,6 @@ public class UserService {
     public int getNicknameCount(String nickname){
         return this.userModel.selectNicknameCount(nickname);
     }
+
+
 }

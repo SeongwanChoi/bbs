@@ -1,7 +1,11 @@
 package dev.bbs.study.csw.controllers.user.apis;
 
+import dev.bbs.study.csw.dtos.UserDto;
+import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.services.UserService;
+import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.apis.CountVo;
+import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(
-        value = "/apis/register",
+        value = "/apis",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
-public class RegisterController {
+public class ApiController {
     private final UserService userService;
 
-    public RegisterController(UserService userService) {
+    public ApiController(UserService userService) {
         this.userService = userService;
     }
 
@@ -28,6 +32,18 @@ public class RegisterController {
                 return String.format("{\"count\":%d}", this.userService.getNicknameCount(countVo.getValue()));
             default:
                 return "{}";
+        }
+    }
+
+    @RequestMapping(value = "/select")
+    public String selectPost(LoginVo loginVo) {
+        this.userService.login(loginVo);
+        JSONObject jsonObject = new JSONObject();
+        if (loginVo.getLoginResult() == LoginResult.NONE) {
+            jsonObject.put("result", loginVo.getLoginResult());
+            return jsonObject.toString(4);
+        } else {
+            return null;
         }
     }
 }

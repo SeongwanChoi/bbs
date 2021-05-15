@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('field', 'e');
         formData.append('value', registerForm['email'].value);
-        Ajax.request('POST', '/apis/register/count', callback, () => {}, formData);
+        Ajax.request('POST', '/apis/count', callback, () => {}, formData);
     });
 
     registerForm['nickname'].addEventListener('focusout', () => {
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('field', 'n');
         formData.append('value', registerForm['nickname'].value);
-        Ajax.request('POST', '/apis/register/count', callback, ()=>{}, formData);
+        Ajax.request('POST', '/apis/count', callback, ()=>{}, formData);
     });
 
     registerForm.onsubmit = () => {

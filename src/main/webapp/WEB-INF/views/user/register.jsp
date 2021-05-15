@@ -1,4 +1,3 @@
-<%@ page import="dev.bbs.study.csw.enums.RegisterResult" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="ko">
