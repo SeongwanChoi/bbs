@@ -28,13 +28,14 @@ window.addEventListener('DOMContentLoaded', ()=> {
          const respJson = JSON.parse(resp);
          if (respJson['select'] === 'NONE') {
             errorWarning.classList.add('visible');
+            loginForm['password'].focus();
             return false;
          } else {
             errorWarning.classList.remove('visible');
          }
       };
     const formData = new FormData;
-    formData.append()
+    formData.append('submit', 's');
     Ajax.request('POST', '/apis/select', callback, ()=>{}, formData);
    }
 });

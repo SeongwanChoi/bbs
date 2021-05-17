@@ -1,4 +1,5 @@
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -26,7 +27,7 @@
     </label>
     <br>
     <span class="warning" rel="password-warning" >비밀번호를 입력해주세요.</span>
-    <span class="warning" rel="error-warning" >가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</span>
+    <span class="warning" rel="error-warning">가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</span>
     <input type="submit" value="로그인">
     <br>
     <a>이메일 찾기</a>

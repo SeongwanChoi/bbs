@@ -1,11 +1,9 @@
 package dev.bbs.study.csw.controllers.user.apis;
 
-import dev.bbs.study.csw.dtos.UserDto;
-import dev.bbs.study.csw.enums.LoginResult;
+
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.apis.CountVo;
-import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,12 +36,12 @@ public class ApiController {
     @RequestMapping(value = "/select")
     public String selectPost(LoginVo loginVo) {
         this.userService.login(loginVo);
-        JSONObject jsonObject = new JSONObject();
-        if (loginVo.getLoginResult() == LoginResult.NONE) {
-            jsonObject.put("result", loginVo.getLoginResult());
-            return jsonObject.toString(4);
-        } else {
-            return null;
+        switch (loginVo.getSubmit()) {
+            case "s":
+                System.out.println(loginVo.getLoginResult());
+                return String.format("{\"select\":%s}", loginVo.getLoginResult());
+            default:
+                return "{}";
         }
     }
 }
