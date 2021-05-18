@@ -1,5 +1,6 @@
 package dev.bbs.study.csw.controllers.user.apis;
 
+import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
@@ -38,11 +39,11 @@ public class ApiController {
     public String selectPost(LoginVo loginVo) {
         this.userService.login(loginVo);
         JSONObject jsonObject = new JSONObject();
-        if (loginVo.getLoginResult() == LoginResult.NONE) {
-            jsonObject.put("result", loginVo.getLoginResult());
-            return jsonObject.toString(4);
-        } else {
-            return null;
+        switch (loginVo.getSubmit()) {
+            case "s":
+                return String.format("{\"select\":%s}", loginVo.getLoginResult());
+            default:
+                return "{}";
         }
     }
 }

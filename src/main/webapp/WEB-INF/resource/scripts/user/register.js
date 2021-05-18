@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const addressPostRegex = new RegExp('^([0-9]{5})$');
         const addressPrimaryRegex = new RegExp('^([0-9a-zA-Z가-힣\\- ]{10,100})$');
         const addressSecondaryRegex = new RegExp('^([0-9a-zA-Z가-힣\\- ]{0,100})$');
-        if (!emailRegex.test(registerForm['email'].value) || emailRegex.test("")) {
+        if (!emailRegex.test(registerForm['email'].value)) {
             alert('올바른 이메일을 입력해주세요.');
             registerForm['email'].focus();
             return false;

@@ -66,15 +66,19 @@ public class UserService {
         if (!UserService.checkEmail(loginVo.getEmail()) ||
             !UserService.checkPassword(loginVo.getPassword())) {
             loginVo.setLoginResult(LoginResult.FAILURE);
+            System.out.println("FAILURE");
             return;
         }
         UserDto userDto = this.userModel.selectUser(loginVo);
         if (userDto == null) {
             loginVo.setLoginResult(LoginResult.NONE);
+            System.out.println("NONE");
             return;
         }
-        if (loginVo.getViewPassword() != loginVo.getPassword()) {
+        if (!userDto.getPassword().equals(loginVo.getViewPassword())) {
             loginVo.setLoginResult(LoginResult.NOTPASSWORD);
+            System.out.println("NOTPASSWORD");
+            return;
         }
         if (userDto.getLevel() == 10) {
             loginVo.setLoginResult(LoginResult.UNAVAILABLE);
@@ -117,6 +121,7 @@ public class UserService {
     public int getNicknameCount(String nickname){
         return this.userModel.selectNicknameCount(nickname);
     }
+
 
 
 }
