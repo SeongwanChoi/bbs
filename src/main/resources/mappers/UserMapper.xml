@@ -41,7 +41,6 @@
                `level`             AS `level`
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
-          AND `password` = #{hashedPassword}
         LIMIT 1
     </select>
 </mapper>

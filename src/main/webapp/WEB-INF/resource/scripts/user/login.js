@@ -36,6 +36,9 @@ window.addEventListener('DOMContentLoaded', ()=> {
       };
     const formData = new FormData;
     formData.append('submit', 's');
+    formData.append('ViewPassword', loginForm['password'].value);
     Ajax.request('POST', '/apis/select', callback, ()=>{}, formData);
+
+
    }
 });

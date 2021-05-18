@@ -73,6 +73,9 @@ public class UserService {
             loginVo.setLoginResult(LoginResult.NONE);
             return;
         }
+        if (loginVo.getViewPassword() != loginVo.getPassword()) {
+            loginVo.setLoginResult(LoginResult.NOTPASSWORD);
+        }
         if (userDto.getLevel() == 10) {
             loginVo.setLoginResult(LoginResult.UNAVAILABLE);
             return;

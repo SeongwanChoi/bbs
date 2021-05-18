@@ -4,5 +4,6 @@ public enum LoginResult {
     FAILURE,
     SUCCESS,
     UNAVAILABLE,
-    NONE
+    NONE,
+    NOTPASSWORD
 }

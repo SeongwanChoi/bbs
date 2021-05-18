@@ -8,16 +8,19 @@ public class LoginVo {
     private final String email;
     private final String password;
     private final String hashedPassword;
+
     private final String submit;
+    private final String ViewPassword;
 
     private LoginResult loginResult;
     private UserDto userDto;
 
-    public LoginVo(String email, String password, String submit) {
+    public LoginVo(String email, String password, String submit, String ViewPassword) {
         this.email = email;
         this.password = password;
         this.hashedPassword = CryptoUtil.Sha512.hash(password, null);
         this.submit = submit;
+        this.ViewPassword = ViewPassword;
     }
 
     public String getEmail() {
@@ -34,6 +37,10 @@ public class LoginVo {
 
     public String getSubmit() {
         return submit;
+    }
+
+    public String getViewPassword() {
+        return ViewPassword;
     }
 
     public LoginResult getLoginResult() {
