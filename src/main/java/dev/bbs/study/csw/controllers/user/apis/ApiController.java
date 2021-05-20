@@ -41,7 +41,9 @@ public class ApiController {
         JSONObject jsonObject = new JSONObject();
         switch (loginVo.getSubmit()) {
             case "s":
-                return String.format("{\"select\":%s}", loginVo.getLoginResult());
+                if (loginVo.getLoginResult() == LoginResult.NONE) {
+                    return String.format("{\"select\":%s}", "NONE");
+                }
             default:
                 return "{}";
         }

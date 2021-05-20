@@ -38,9 +38,8 @@ window.addEventListener('DOMContentLoaded', ()=> {
           }
       };
     const formData = new FormData;
-    formData.append('submit', 's');
-    formData.append('ViewEmail', loginForm['email'].value);
-    formData.append('ViewPassword', loginForm['password'].value);
+    formData.append('email', loginForm['email'].value);
+    formData.append('password', loginForm['password'].value);
     Ajax.request('POST', '/apis/select', callback, ()=>{}, formData);
 
 
