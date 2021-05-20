@@ -27,21 +27,5 @@ window.addEventListener('DOMContentLoaded', ()=> {
          passwordWarning.classList.remove('visible');
       }
 
-      const callback = (resp) => {
-          const respJson = JSON.parse(resp);
-          if (respJson['select'] === 'NOTPASSWORD') {
-             errorWarning.classList.add('visible');
-             loginForm['password'].focus();
-             return false;
-          } else {
-             errorWarning.classList.remove('visible');
-          }
-      };
-    const formData = new FormData;
-    formData.append('email', loginForm['email'].value);
-    formData.append('password', loginForm['password'].value);
-    Ajax.request('POST', '/apis/select', callback, ()=>{}, formData);
-
-
    }
 });

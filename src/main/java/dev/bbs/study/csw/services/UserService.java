@@ -63,16 +63,16 @@ public class UserService {
     }
 
     public void login(LoginVo loginVo) {
+        System.out.println(loginVo.getEmail());
         if (!UserService.checkEmail(loginVo.getEmail()) ||
             !UserService.checkPassword(loginVo.getPassword())) {
             loginVo.setLoginResult(LoginResult.FAILURE);
-            System.out.println("FAILURE");
             return;
         }
         UserDto userDto = this.userModel.selectUser(loginVo);
         if (userDto == null) {
             loginVo.setLoginResult(LoginResult.NONE);
-            System.out.println("NONE");
+            System.out.println(loginVo.getLoginResult());
             return;
         }
         if (userDto.getLevel() == 10) {
@@ -81,6 +81,7 @@ public class UserService {
         }
         loginVo.setLoginResult(LoginResult.SUCCESS);
         loginVo.setUserDto(userDto);
+        return;
     }
 
     public void register(RegisterVo registerVo) {

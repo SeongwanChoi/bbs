@@ -35,17 +35,5 @@ public class ApiController {
         }
     }
 
-    @RequestMapping(value = "/select")
-    public String selectPost(LoginVo loginVo) {
-        this.userService.login(loginVo);
-        JSONObject jsonObject = new JSONObject();
-        switch (loginVo.getSubmit()) {
-            case "s":
-                if (loginVo.getLoginResult() == LoginResult.NONE) {
-                    return String.format("{\"select\":%s}", "NONE");
-                }
-            default:
-                return "{}";
-        }
-    }
+
 }

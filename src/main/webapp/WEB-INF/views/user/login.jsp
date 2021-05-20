@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>로그인</title>
     <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
+    <script>${vo.loginResult == LoginResult.NONE ? "alert('이메일 혹은 비밀번호가 올바르지 않습니다.');" : ""}</script>
     <script src="/resource/scripts/class.ajax.js"></script>
     <script src="/resource/scripts/user/login.js"></script>
 </head>
