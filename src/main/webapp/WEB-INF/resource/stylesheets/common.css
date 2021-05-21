@@ -1,0 +1,46 @@
+@import "header.css";
+@import "footer.css";
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #ffffff;
+    color: #10151a;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+ol, ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    list-style-type: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: inherit;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+body > main > div > h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+a:link, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
