@@ -59,7 +59,6 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("vo", loginVo);
-            System.out.println(loginVo.getLoginResult());
             return "user/login";
         }
     }

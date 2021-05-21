@@ -1,6 +1,5 @@
 package dev.bbs.study.csw.dtos;
 
-
 public class UserDto {
     public static final String NAME = "user";
 
