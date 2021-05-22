@@ -2,11 +2,13 @@
 <header>
     <div class="header_01">
         <div class="tag">
-            <div>BOOKMARK+</div>
-            <div>페북</div>
-            <div>인스타</div>
-            <div>카톡</div>
-            <div>남자옷쇼핑몰 스나이퍼샵</div>
+            <ul>
+                <li>BOOKMARK+</li>
+                <li>페북</li>
+                <li>인스타</li>
+                <li>카톡</li>
+                <li>남자옷쇼핑몰 스나이퍼샵</li>
+            </ul>
         </div>
         <div class="search"></div>
         <div class="user">

@@ -13,11 +13,23 @@ body > header > div > div.tag {
     justify-content: center;
 }
 
-body > header > div > div.tag:nth-child(1) {
-    border-top: 1px solid #fff;
+body > header > div > div.tag > ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-body > header > div > div.tag:nth-child(1):hover {
+body > header > div > div.tag > ul > li {
+    padding: 0 7px 0 9px;
+}
+
+body > header > div > div.tag > ul > li:first-child {
+    border-top: 1px solid #fff;
+    line-height: 39px;
+}
+
+body > header > div > div.tag > ul > li:first-child:hover {
     border-top: 1px solid #111;
 }
 
@@ -34,7 +46,6 @@ body > header > div > div.user > ul {
 }
 
 body > header > div > div.user > ul > li {
-
     padding: 0 7px 1px 8px;
     border-top: 1px solid #fff;
     line-height: 39px;

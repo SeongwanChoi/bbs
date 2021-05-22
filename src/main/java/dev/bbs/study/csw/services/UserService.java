@@ -6,13 +6,13 @@ import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.models.IUserModel;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.RegisterVo;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     private final IUserModel userModel;
-
 
     @Autowired
     public UserService(IUserModel userModel) {
@@ -31,8 +31,6 @@ public class UserService {
         public static final String ADDRESS_POST = "^([0-9]{5})$";
         public static final String ADDRESS_PRIMARY = "^([0-9a-zA-Z가-힣\\- ]{10,100})$";
     }
-
-
 
     public static boolean checkEmail(String email) {
         return email.matches(Regex.EMAIL);
@@ -65,6 +63,7 @@ public class UserService {
     }
 
     public void login(LoginVo loginVo) {
+        System.out.println(loginVo.getEmail());
         if (!UserService.checkEmail(loginVo.getEmail()) ||
             !UserService.checkPassword(loginVo.getPassword())) {
             loginVo.setLoginResult(LoginResult.FAILURE);
@@ -73,6 +72,7 @@ public class UserService {
         UserDto userDto = this.userModel.selectUser(loginVo);
         if (userDto == null) {
             loginVo.setLoginResult(LoginResult.NONE);
+            System.out.println(loginVo.getLoginResult());
             return;
         }
         if (userDto.getLevel() == 10) {
