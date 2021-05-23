@@ -11,26 +11,29 @@ body > header > div > div.tag {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-left: 20rem;
 }
 
-body > header > div > div.tag > ul {
+body > header > div > div.tag > div {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 
-body > header > div > div.tag > ul > li {
+body > header > div > div.tag > div:first-child {
+    border-top: 1px solid #fff;
+    line-height: 39px;
     padding: 0 7px 0 9px;
 }
 
-body > header > div > div.tag > ul > li:first-child {
-    border-top: 1px solid #fff;
-    line-height: 39px;
+body > header > div > div.tag > div:first-child:hover {
+    border-top: 1px solid #111;
 }
 
-body > header > div > div.tag > ul > li:first-child:hover {
-    border-top: 1px solid #111;
+body > header > div > div.tag > div:last-child {
+    padding: 0 0 0 0.0625rem;
 }
 
 body > header > div> div.search {
@@ -45,14 +48,42 @@ body > header > div > div.user > ul {
     justify-content: center;
 }
 
-body > header > div > div.user > ul > li {
-    padding: 0 7px 1px 8px;
+body > header > div > div.user > a {
+    padding: 11px 7px 1px 8px;
     border-top: 1px solid #fff;
-    line-height: 39px;
     color: #10151a;
     letter-spacing: 0.08em;
 }
 
-body > header > div > div.user > ul > li:hover {
+body > header > div > div.user > a:hover {
     border-top: 1px solid #111;
+}
+
+body > header > div > div.select {
+    padding-right: 20rem;
+}
+
+body > header > div > div.select > form > input.select-input {
+    border-radius: 5px 0 0 5px;
+    background-color: #eee;
+    border: none;
+    height: 26px;
+    width: 106px;
+    font-size: 12px;
+    line-height: 28px;
+    position: relative;
+    margin: 0 -1px 0 0;
+    padding: 0px 0px 0px 15px;
+    color: #333;
+
+}
+
+body > header > div > div.select > form > input.select-input:hover {
+    background-color: #ddd;
+    border: none;
+}
+
+body > header > div > div.select > form > input.select-input:focus {
+    background-color: #ddd;
+    border: none;
 }

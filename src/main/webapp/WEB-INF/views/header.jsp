@@ -2,28 +2,32 @@
 <header>
     <div class="header_01">
         <div class="tag">
-            <ul>
-                <li>BOOKMARK+</li>
-                <li>페북</li>
-                <li>인스타</li>
-                <li>카톡</li>
-                <li>남자옷쇼핑몰 스나이퍼샵</li>
-            </ul>
+            <div>BOOKMARK+</div>
+            <div>페북</div>
+            <div>인스타</div>
+            <div>카톡</div>
+            <div>남자옷쇼핑몰 스나이퍼샵</div>
         </div>
         <div class="search"></div>
         <div class="user">
-            <ul>
-                <li>로그인</li>
-                <li>회원가입</li>
-                <li>장바구니</li>
-                <li>마이페이지</li>
-                <li>커뮤니티</li>
-                <li>검색</li>
-            </ul>
+                <a href="login">로그인</a>
+                <a href="register">회원가입</a>
+                <a>장바구니</a>
+                <a>마이페이지</a>
+                <a>커뮤니티</a>
+        </div>
+        <div class="select">
+            <form>
+                <label hidden>검색</label>
+                <input class="select-input" type="text" name="검색" placeholder="검색" size="12">
+                <input class="selectClick-input" type="image" name="돋보기">
+            </form>
         </div>
     </div>
     <!-- 중단 -->
-    <div class="header_02"></div>
+    <div class="header_02">
+        <a href="index.jsp" target="_self">SNIPER#</a>
+    </div>
     <!-- 하단 -->
     <div class="header_03"></div>
 </header>
