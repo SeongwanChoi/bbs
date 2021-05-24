@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" language="java" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -8,12 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>회원가입</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/register.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/resource/scripts/class.ajax.js"></script>
     <script src="/resource/scripts/user/register.js"></script>
 </head>
 <body class="register">
+<%@ include file="/WEB-INF/views/header.jsp"%>
 <form action="/user/register" id="register-form" method="post">
     <label>
         <span hidden>이메일</span>
@@ -81,6 +83,7 @@
     <br>
     <input type="submit" value="회원가입">
 </form>
+<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>
 
