@@ -1,4 +1,4 @@
-body > header > div {
+body > header > div.header_01 {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -6,7 +6,7 @@ body > header > div {
     font-size: 12px;
 }
 
-body > header > div > div.tag {
+body > header > div.header_01 > div.tag {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -14,7 +14,7 @@ body > header > div > div.tag {
     padding-left: 20rem;
 }
 
-body > header > div > div.tag > div {
+body > header > div.header_01 > div.tag > div {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -22,48 +22,48 @@ body > header > div > div.tag > div {
 
 }
 
-body > header > div > div.tag > div:first-child {
+body > header > div.header_01 > div.tag > div:first-child {
     border-top: 1px solid #fff;
     line-height: 39px;
     padding: 0 7px 0 9px;
 }
 
-body > header > div > div.tag > div:first-child:hover {
+body > header > div.header_01 > div.tag > div:first-child:hover {
     border-top: 1px solid #111;
 }
 
-body > header > div > div.tag > div:last-child {
+body > header > div.header_01 > div.tag > div:last-child {
     padding: 0 0 0 0.0625rem;
 }
 
-body > header > div> div.search {
+body > header > div.header_01> div.search {
     flex-grow: 1;
     flex-shrink: 1;
 }
 
-body > header > div > div.user > ul {
+body > header > div.header_01 > div.user > ul {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-body > header > div > div.user > a {
+body > header > div.header_01 > div.user > a {
     padding: 11px 7px 1px 8px;
     border-top: 1px solid #fff;
     color: #10151a;
     letter-spacing: 0.08em;
 }
 
-body > header > div > div.user > a:hover {
+body > header > div.header_01 > div.user > a:hover {
     border-top: 1px solid #111;
 }
 
-body > header > div > div.select {
+body > header > div.header_01 > div.select {
     padding-right: 20rem;
 }
 
-body > header > div > div.select > form > input.select-input {
+body > header > div.header_01 > div.select > form > input.select-input {
     border-radius: 5px 0 0 5px;
     background-color: #eee;
     border: none;
@@ -78,12 +78,18 @@ body > header > div > div.select > form > input.select-input {
 
 }
 
-body > header > div > div.select > form > input.select-input:hover {
+body > header > div.header_01 > div.select > form > input.select-input:hover {
     background-color: #ddd;
     border: none;
 }
 
-body > header > div > div.select > form > input.select-input:focus {
+body > header > div.header_01 > div.select > form > input.select-input:focus {
     background-color: #ddd;
     border: none;
+}
+
+body > header > div.header_02 > a {
+    font-size: 3rem;
+    padding: 1rem 0 1rem 0;
+    font-weight: 55
 }

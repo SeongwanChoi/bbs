@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <header>
+    <!-- 상단 -->
     <div class="header_01">
         <div class="tag">
             <div>BOOKMARK+</div>
@@ -26,7 +27,7 @@
     </div>
     <!-- 중단 -->
     <div class="header_02">
-        <a href="index.jsp" target="_self">SNIPER#</a>
+        <a href="/" target="_self">SNIPER#</a>
     </div>
     <!-- 하단 -->
     <div class="header_03"></div>
