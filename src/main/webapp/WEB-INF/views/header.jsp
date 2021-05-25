@@ -3,7 +3,7 @@
     <!-- 상단 -->
     <div class="header_01">
         <div class="tag">
-            <div>BOOKMARK+</div>
+            <a href="javascript:bookmark('http://127.0.0.1/user/login', '로그인')">BOOKMARK+</a>
             <a href="https://www.facebook.com/?locale2=ko_KR" target="_blank"><img src="https://img.icons8.com/offices/20/000000/facebook-circled.png"/></a>
             <a href="https://www.instagram.com/" target="_blank"><img src="https://img.icons8.com/office/20/000000/instagram-new.png"/></a>
             <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo" target="_blank"><img src="https://img.icons8.com/dusk/20/000000/kakaotalk.png"/></a>
@@ -13,7 +13,7 @@
         <div class="user">
                 <a href="/user/login">로그인</a>
                 <a href="register">회원가입</a>
-                <a>장바구니</a>
+                <a class="user-my">장바구니</a>
                 <a>마이페이지</a>
                 <a>커뮤니티</a>
         </div>

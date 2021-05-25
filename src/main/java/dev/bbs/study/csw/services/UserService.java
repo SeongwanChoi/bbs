@@ -64,15 +64,24 @@ public class UserService {
 
     public void login(LoginVo loginVo) {
         System.out.println(loginVo.getEmail());
+        System.out.println(loginVo.getPassword());
+        if (loginVo.getEmail().equals("")) {
+            loginVo.setLoginResult(LoginResult.EMAILBlank);
+            return;
+        }
+        if (loginVo.getPassword().equals("")) {
+            loginVo.setLoginResult(LoginResult.PASSWORDBlank);
+            return;
+        }
         if (!UserService.checkEmail(loginVo.getEmail()) ||
             !UserService.checkPassword(loginVo.getPassword())) {
+            System.out.println(loginVo.getLoginResult());
             loginVo.setLoginResult(LoginResult.FAILURE);
             return;
         }
         UserDto userDto = this.userModel.selectUser(loginVo);
         if (userDto == null) {
             loginVo.setLoginResult(LoginResult.NONE);
-            System.out.println(loginVo.getLoginResult());
             return;
         }
         if (userDto.getLevel() == 10) {
@@ -114,10 +123,7 @@ public class UserService {
         return this.userModel.selectEmailCount(email);
     }
 
-    public int getNicknameCount(String nickname){
+    public int getNicknameCount(String nickname) {
         return this.userModel.selectNicknameCount(nickname);
     }
-
-
-
 }

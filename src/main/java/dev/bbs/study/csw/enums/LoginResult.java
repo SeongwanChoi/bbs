@@ -5,5 +5,6 @@ public enum LoginResult {
     SUCCESS,
     UNAVAILABLE,
     NONE,
-    NOTPASSWORD
+    EMAILBlank,
+    PASSWORDBlank
 }

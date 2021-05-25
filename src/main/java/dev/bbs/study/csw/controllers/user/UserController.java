@@ -54,6 +54,7 @@ public class UserController {
             return "redirect:/";
         }
         this.userService.login(loginVo);
+        System.out.println(loginVo.getLoginResult());
         if (loginVo.getLoginResult() == LoginResult.SUCCESS) {
             model.addAttribute(UserDto.NAME, loginVo.getUserDto());
             return "redirect:/";

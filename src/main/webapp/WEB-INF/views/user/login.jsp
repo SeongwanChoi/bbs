@@ -11,10 +11,6 @@
     <title>로그인</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
-    <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
-    <script src="/resource/scripts/class.ajax.js"></script>
-    <script src="/resource/scripts/user/login.js"></script>
-    <script>${vo.loginResult == LoginResult.NONE ? "alert('이메일 혹은 비밀번호가 올바르지 않습니다.');" : ""}</script>
 </head>
 <body class="login">
 <%@ include file="/WEB-INF/views/header.jsp"%>
@@ -25,19 +21,40 @@
         <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${vo.email}">
     </label>
     <br>
-    <span class="warning" rel="email-warning" >이메일을 입력해주세요.</span>
+    <c:choose>
+        <c:when test="${vo.loginResult == LoginResult.EMAILBlank}">
+            <span style="color: red; display: block;">이메일을 입력해주세요.</span>
+        </c:when>
+        <c:when test="${vo.loginResult != LoginResult.EMAILBlank}">
+            <span style="display: none;">이메일을 입력해주세요.</span>
+        </c:when>
+    </c:choose>
     <label>
         <span hidden>비밀번호</span>
         <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${vo.password}">
     </label>
     <br>
-    <span class="warning" rel="password-warning" >비밀번호를 입력해주세요.</span>
-    <span class="warning" rel="error-warning">가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</span>
+    <c:choose>
+        <c:when test="${vo.loginResult != LoginResult.PASSWORDBlank}">
+            <span style="display: none;">비밀번호를 입력해주세요.</span>
+        </c:when>
+        <c:when test="${vo.loginResult == LoginResult.PASSWORDBlank}">
+            <span style="color: red; display: block;">비밀번호를 입력해주세요.</span>
+        </c:when>
+    </c:choose>
+    <c:choose>
+        <c:when test="${vo.loginResult == LoginResult.NONE}">
+            <span style="display: block; color: red;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+        </c:when>
+        <c:when test="${vo.loginResult != LoginResult.NONE}">
+            <span style="display: none;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+        </c:when>
+    </c:choose>
     <input type="submit" value="로그인">
     <br>
-    <a>이메일 찾기</a>
-    <a>비밀번호 찾기</a>
-    <a href="register">회원가입</a>
+    <a class="login-side">이메일 찾기</a>
+    <a class="login-side">비밀번호 찾기</a>
+    <a class="login-side" href="register">회원가입</a>
 </form>
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
