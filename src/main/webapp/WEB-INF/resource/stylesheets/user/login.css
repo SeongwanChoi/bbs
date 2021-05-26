@@ -1,0 +1,40 @@
+body.login > form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 40vh;
+}
+
+body.login > form > div > div.login-login {
+    font-size: 35px;
+    font-weight: 400;
+    color: #333;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+body.login > form > div > div.login-welcome {
+    color: #999;
+    margin: 0 0 30px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+}
+
+body.login > form > label > input {
+    width: 321px;
+    height: 45px;
+    padding: 2px 65px 2px 20px;
+    border: 1px solid #ddd;
+    color: #333;
+    font-size: 14px;
+    line-height: 45px;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+}
+
+body.login > form > label > input:focus {
+    outline: none;
+    border-color: #10151a;
+}

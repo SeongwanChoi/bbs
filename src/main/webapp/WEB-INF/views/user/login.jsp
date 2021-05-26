@@ -11,11 +11,16 @@
     <title>로그인</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
+    <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
 </head>
 <body class="login">
 <%@ include file="/WEB-INF/views/header.jsp"%>
-<form method="post" action="/user/login" id="login-form">
-    <div>Login</div>
+<form method="post" action="/user/login">
+    <div>
+        <div class="login-login">LOGIN</div>
+        <div class="login-welcome">WELCOME BACK</div>
+    </div>
+
     <label>
         <span hidden>이메일</span>
         <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${vo.email}">

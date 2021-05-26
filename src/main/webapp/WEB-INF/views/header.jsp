@@ -3,7 +3,7 @@
     <!-- 상단 -->
     <div class="header_01">
         <div class="tag">
-            <a href="javascript:bookmark('http://127.0.0.1/user/login', '로그인')">BOOKMARK+</a>
+            <a>BOOKMARK+</a>
             <a href="https://www.facebook.com/?locale2=ko_KR" target="_blank"><img src="https://img.icons8.com/offices/20/000000/facebook-circled.png"/></a>
             <a href="https://www.instagram.com/" target="_blank"><img src="https://img.icons8.com/office/20/000000/instagram-new.png"/></a>
             <a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Faccounts.kakao.com%2Fweblogin%2Faccount%2Finfo" target="_blank"><img src="https://img.icons8.com/dusk/20/000000/kakaotalk.png"/></a>
@@ -20,7 +20,7 @@
         <div class="select">
             <form>
                 <label hidden>검색</label>
-                <input class="select-input" type="text" name="검색" placeholder="검색" size="12">
+                <input class="input" type="text" name="검색" placeholder="검색" size="12">
             </form>
         </div>
     </div>
@@ -50,8 +50,4 @@
         </ul>
         <a><img src="https://img.icons8.com/small/16/000000/time.png"/>타임세일</a>
     </div>
-
-
-
-
 </header>

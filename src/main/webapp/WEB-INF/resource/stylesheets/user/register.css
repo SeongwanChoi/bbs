@@ -8,3 +8,8 @@ body.register > form .warning.visible {
     display: inline-block;
 }
 
+body.register > form .warning.NoneVisible {
+    display: inline-block;
+    color: forestgreen;
+}
+

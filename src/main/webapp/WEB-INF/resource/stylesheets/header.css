@@ -12,7 +12,6 @@ body > header > div.header_01 > div.tag {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-left: 20rem;
 }
 
 body > header > div.header_01 > div.tag > a:first-child {
@@ -77,7 +76,7 @@ body > header > div.header_01 > div.select {
     padding-right: 20rem;
 }
 
-body > header > div.header_01 > div.select > form > input.select-input {
+body > header > div.header_01 > div.select > form > input.input {
     border-radius: 5px;
     background-color: #eee;
     border: none;
@@ -92,15 +91,14 @@ body > header > div.header_01 > div.select > form > input.select-input {
 
 }
 
-body > header > div.header_01 > div.select > form > input.select-input:hover,
-body > header > div.header_01 > div.select > form > input.select-input:active {
+body > header > div.header_01 > div.select > form > input.input:hover {
     background-color: #ddd;
     border: none;
+
 }
 
-body > header > div.header_01 > div.select > form > img {
-    line-height: 28px;
-    background-color: #eee;
+body > header > div.header_01 > div.select > form > input.input:focus {
+    outline: none;
 }
 
 body > header > div.header_02 {
