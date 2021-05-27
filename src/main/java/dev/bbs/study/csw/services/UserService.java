@@ -63,8 +63,6 @@ public class UserService {
     }
 
     public void login(LoginVo loginVo) {
-        System.out.println(loginVo.getEmail());
-        System.out.println(loginVo.getPassword());
         if (loginVo.getEmail().equals("")) {
             loginVo.setLoginResult(LoginResult.EMAILBlank);
             return;

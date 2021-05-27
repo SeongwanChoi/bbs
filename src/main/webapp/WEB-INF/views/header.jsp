@@ -20,7 +20,7 @@
         <div class="select">
             <form>
                 <label hidden>검색</label>
-                <input class="input" type="text" name="검색" placeholder="검색" size="12">
+                <input class="select-input" type="text" name="검색" placeholder="검색" size="12">
             </form>
         </div>
     </div>
@@ -50,4 +50,8 @@
         </ul>
         <a><img src="https://img.icons8.com/small/16/000000/time.png"/>타임세일</a>
     </div>
+
+
+
+
 </header>
