@@ -3,9 +3,10 @@ body.login > form {
     display: flex;
     flex-direction: column;
     min-height: 40vh;
+    justify-content: flex-end;
 }
 
-body.login > form > div > div.login-login {
+body.login > form > div.title > a.login-text {
     font-size: 35px;
     font-weight: 400;
     color: #333;
@@ -13,16 +14,20 @@ body.login > form > div > div.login-login {
     text-align: center;
 }
 
-body.login > form > div > div.login-welcome {
+body.login > form > div.title > div.login-welcome {
     color: #999;
-    margin: 0 0 30px;
+    margin: 0 0 40px;
     text-align: center;
     font-size: 12px;
     font-weight: 400;
     letter-spacing: -0.03em;
 }
 
-body.login > form > label > input {
+body.login > form > div > div.email {
+    margin-bottom: 5px;
+}
+
+body.login > form > div > div > label > input {
     width: 321px;
     height: 45px;
     padding: 2px 65px 2px 20px;
@@ -34,7 +39,20 @@ body.login > form > label > input {
     font-weight: normal;
 }
 
-body.login > form > label > input:focus {
+body.login > form > div > div > label > input:focus {
     outline: none;
     border-color: #10151a;
+}
+
+body.login > form > input {
+    transform: translateY(10px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 180px;
+    padding-right: 180px;
+    text-align: center;
+    background-color: darkgray;
+    color: white;
+    border: none;
+    font-size: 16px;
 }
