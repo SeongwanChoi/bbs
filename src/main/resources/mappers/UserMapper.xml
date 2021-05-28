@@ -44,4 +44,9 @@
           AND `password` = #{hashedPassword}
         LIMIT 1
     </select>
+
+    <insert id="insertAutoSignKey">
+        INSERT INTO `git_bbs`.`login_auto_sign_keys` (`user_email`, `key`, `expires_key`)
+        VALUES (#{email}, #{key}, DATE_ADD(NOW(), INTERVAL #{days} DAY))
+    </insert>
 </mapper>

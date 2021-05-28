@@ -9,36 +9,38 @@ public class LoginVo {
     private final String password;
     private final String hashedPassword;
 
-    private final String submit;
-
+    private boolean autoSign;
     private LoginResult loginResult;
     private UserDto userDto;
 
-    public LoginVo(String email, String password, String submit) {
+    public LoginVo(String email, String password) {
         this.email = email;
         this.password = password;
         this.hashedPassword = CryptoUtil.Sha512.hash(password, null);
-        this.submit = submit;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public String getHashedPassword() {
-        return hashedPassword;
+        return this.hashedPassword;
     }
 
-    public String getSubmit() {
-        return submit;
+    public boolean isAutoSign() {
+        return this.autoSign;
+    }
+
+    public void setAutoSign(boolean autoSign) {
+        this.autoSign = autoSign;
     }
 
     public LoginResult getLoginResult() {
-        return loginResult;
+        return this.loginResult;
     }
 
     public void setLoginResult(LoginResult loginResult) {
@@ -46,7 +48,7 @@ public class LoginVo {
     }
 
     public UserDto getUserDto() {
-        return userDto;
+        return this.userDto;
     }
 
     public void setUserDto(UserDto userDto) {

@@ -18,6 +18,8 @@ public class UserDto {
     private final String addressSecondary;
     private final int level;
 
+    private String autoSignKey;
+
     public UserDto(int index, String email, String password, String nickname,
                    String nameFirst, String nameOptional, String nameLast,
                    String contactFirst, String contactSecond, String contactThird,
@@ -96,5 +98,13 @@ public class UserDto {
 
     public int getLevel() {
         return level;
+    }
+
+    public String getAutoSignKey() {
+        return autoSignKey;
+    }
+
+    public void setAutoSignKey(String autoSignKey) {
+        this.autoSignKey = autoSignKey;
     }
 }
