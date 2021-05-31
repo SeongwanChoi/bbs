@@ -49,4 +49,27 @@
         INSERT INTO `git_bbs`.`login_auto_sign_keys` (`user_email`, `key`, `expires_key`)
         VALUES (#{email}, #{key}, DATE_ADD(NOW(), INTERVAL #{days} DAY))
     </insert>
+
+    <select id="selectUserFromCookie" resultType="dev.bbs.study.csw.dtos.UserDto">
+        SELECT `user`.`index`             AS `index`,
+               `user`.`email`             AS `email`,
+               `user`.`password`          AS `password`,
+               `user`.`nickname`          AS `nickname`,
+               `user`.`name_first`        AS `nameFirst`,
+               `user`.`name_optional`     AS `nameOptional`,
+               `user`.`name_last`         AS `nameLast`,
+               `user`.`contact_first`     AS `contactFirst`,
+               `user`.`contact_second`    AS `contactSecond`,
+               `user`.`contact_third`     AS `contactThird`,
+               `user`.`address_post`      AS `addressPost`,
+               `user`.`address_primary`   AS `addressPrimary`,
+               `user`.`address_secondary` AS `addressSecondary`,
+               `user`.`level`             AS `level`
+        FROM `git_bbs`.`login_auto_sign_keys` AS `key`
+                 LEFT JOIN `git_bbs`.`users` AS `user` ON `key`.`user_email` = `user`.`email`
+        WHERE `key`.`key` = #{key}
+          AND `key`.`expires_key` > NOW()
+          AND `key`.`expired_flag` = FALSE
+        LIMIT 1
+    </select>
 </mapper>

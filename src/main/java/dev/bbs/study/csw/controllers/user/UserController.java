@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping(value = "/user")
 @SessionAttributes(UserDto.NAME)
@@ -47,6 +50,7 @@ public class UserController {
             method = RequestMethod.POST,
             produces = MediaType.TEXT_HTML_VALUE)
     public String loginPost(
+            HttpServletResponse response,
             @ModelAttribute(UserDto.NAME) UserDto userDto,
             LoginVo loginVo,
             Model model) {
@@ -55,6 +59,14 @@ public class UserController {
         }
         this.userService.login(loginVo);
         if (loginVo.getLoginResult() == LoginResult.SUCCESS) {
+            if (loginVo.isAutoSign()) {
+                this.userService.putAutoSignKey(loginVo.getUserDto());
+
+                Cookie cookie = new Cookie("ask", loginVo.getUserDto().getAutoSignKey());
+                cookie.setMaxAge(60 * 60 * 24 * UserService.Config.AUTO_SIGN_VALID_DAYS);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
             model.addAttribute(UserDto.NAME, loginVo.getUserDto());
             return "redirect:/";
         } else {

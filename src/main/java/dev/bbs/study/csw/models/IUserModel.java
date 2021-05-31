@@ -20,4 +20,7 @@ public interface IUserModel {
             @Param("email") String email,
             @Param("key") String key,
             @Param("days") int days); // 자동로그인 활성화
+
+    UserDto selectUserFromCookie(
+            @Param("key") String key);
 }
