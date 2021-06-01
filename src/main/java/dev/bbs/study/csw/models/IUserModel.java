@@ -22,5 +22,9 @@ public interface IUserModel {
             @Param("days") int days); // 자동로그인 활성화
 
     UserDto selectUserFromCookie(
-            @Param("key") String key);
+            @Param("key") String key); // 자동로그인 키 확인
+
+    void updateAutoSignKeyDay(
+            @Param("key") String key,
+            @Param("days") int days); // 자동로그인 정상 사용시 유효기간 초기화
 }

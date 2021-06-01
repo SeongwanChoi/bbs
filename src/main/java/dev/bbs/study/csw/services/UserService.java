@@ -18,7 +18,7 @@ import java.util.Date;
 @Service
 public class UserService {
     public static class Config {
-        public static final int AUTO_SIGN_KEY_HASH_COUNT = 10; //
+        public static final int AUTO_SIGN_KEY_HASH_COUNT = 10; // 해쉬암호화 재조정 횟수 (보안)
         public static final int AUTO_SIGN_VALID_DAYS = 7; // 자동로그인 최대 적용기간
     }
 
@@ -102,15 +102,15 @@ public class UserService {
         return;
     } // 승인될경우 승인결과 (SUCCESS) 넣어주고 DTO에 있는 유저정보(본인) 넘겨줌
 
-    public UserDto login(Cookie autoSignKeyCookie) {
+    public UserDto login(Cookie autoSignKeyCookie) { // 자동로그인 사용
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return null;
+        } // 키 값 정규식 확인
+        UserDto userDto = this.userModel.selectUserFromCookie(autoSignKeyCookie.getValue()); // DB에서 확인될경우 DTO를 가져옴
+        if (userDto == null || userDto.getLevel() == 10) { // DTO가 null이거나(유저정보 없음) || Level값이 10이상(잠금유저)
+            return null; // 접근 거부
         }
-        UserDto userDto = this.userModel.selectUserFromCookie(autoSignKeyCookie.getValue());
-        if (userDto == null || userDto.getLevel() == 10) {
-            return null;
-        }
-        return userDto;
+        return userDto; // 그렇지 않을경우 유저정보 반환
     }
 
     public void putAutoSignKey(UserDto userDto) { // 자동로그인 최초확인
@@ -122,8 +122,15 @@ public class UserService {
         for (int i = 0; i < Config.AUTO_SIGN_KEY_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
         } // 자동로그인 키 해쉬화
-        this.userModel.insertAutoSignKey(userDto.getEmail(), key, Config.AUTO_SIGN_VALID_DAYS);
-        userDto.setAutoSignKey(key);
+        this.userModel.insertAutoSignKey(userDto.getEmail(), key, Config.AUTO_SIGN_VALID_DAYS); // 만든 키를 DB에 생성
+        userDto.setAutoSignKey(key); // 최종적으로 해쉬화로 생성된 키를 DTO의 AutosignKey로 set 시킴
+    }
+
+    public void extendAutoSignKey(Cookie autoSignKeyCookie) {
+        if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
+            return;
+        } // 키 값 정규식 확인
+        this.userModel.updateAutoSignKeyDay(autoSignKeyCookie.getValue(), Config.AUTO_SIGN_VALID_DAYS); // 통과한 키 값의 유효기간 업데이트
     }
 
     public void register(RegisterVo registerVo) { // 회원가입

@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
+    <script src="resource/scripts/user/login.js"></script>
 </head>
 <body class="login">
-<form method="post" action="/user/login">
+<form id="login-form" method="post" action="/user/login">
     <div class="title">
         <a class="login-text" href="login" target="_self">LOGIN</a>
         <div class="login-welcome">WELCOME BACK</div>

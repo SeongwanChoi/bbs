@@ -31,6 +31,22 @@ public class AutoSingInterceptor implements HandlerInterceptor {
                     break;
                 }
             }
+            if (autoSignKeyCookie != null) {
+                userDto = this.userService.login(autoSignKeyCookie);
+                if (userDto != null) {
+                    session.setAttribute(UserDto.NAME, userDto);
+
+                    this.userService.extendAutoSignKey(autoSignKeyCookie);
+                    autoSignKeyCookie.setMaxAge(60 * 60 * 24 * UserService.Config.AUTO_SIGN_VALID_DAYS);
+                    autoSignKeyCookie.setPath("/");
+                    response.addCookie(autoSignKeyCookie);
+                    if (request.getRequestURI().equals("/user/login") ||
+                            request.getRequestURI().equals("/user/register")) {
+                        response.sendRedirect("/");
+                        return false;
+                    }
+                }
+            }
         }
         return true;
     }

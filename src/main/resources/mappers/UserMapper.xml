@@ -72,4 +72,13 @@
           AND `key`.`expired_flag` = FALSE
         LIMIT 1
     </select>
+
+    <update id="updateAutoSignKeyDay">
+        UPDATE `git_bbs`.`login_auto_sign_keys`
+        SET `expires_key` = DATE_ADD(NOW(), INTERVAL #{days} DAY)
+        WHERE `key` = #{key}
+          AND `expires_key` > NOW()
+          AND `expired_flag` = FALSE
+        LIMIT 1
+    </update>
 </mapper>
