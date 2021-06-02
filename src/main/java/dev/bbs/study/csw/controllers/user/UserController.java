@@ -61,8 +61,7 @@ public class UserController {
         if (loginVo.getLoginResult() == LoginResult.SUCCESS) {
             if (loginVo.isAutoSign()) {
                 this.userService.putAutoSignKey(loginVo.getUserDto());
-
-                Cookie cookie = new Cookie("ask", loginVo.getUserDto().getAutoSignKey());
+                Cookie cookie = new Cookie("Autologin", loginVo.getUserDto().getAutoSignKey());
                 cookie.setMaxAge(60 * 60 * 24 * UserService.Config.AUTO_SIGN_VALID_DAYS);
                 cookie.setPath("/");
                 response.addCookie(cookie);

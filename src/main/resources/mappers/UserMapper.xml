@@ -23,7 +23,6 @@
         WHERE `nickname` = #{nickname}
     </select>
 
-
     <select id="selectUser" parameterType="dev.bbs.study.csw.vos.LoginVo" resultType="dev.bbs.study.csw.dtos.UserDto">
         SELECT `index`             AS `index`,
                `email`             AS `email`,

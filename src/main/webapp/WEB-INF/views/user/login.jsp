@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
     <script src="resource/scripts/user/login.js"></script>
+
 </head>
 <body class="login">
 <form id="login-form" method="post" action="/user/login">
@@ -63,7 +64,7 @@
     <input type="submit" value="로그인">
     <br>
     <label>
-        <input type="checkbox", name="autoSingKey">
+        <input type="checkbox" name="autoSign">
         <span>자동 로그인</span>
     </label>
 

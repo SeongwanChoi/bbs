@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AutoSingInterceptor implements HandlerInterceptor {
+public class AutoSignInterceptor implements HandlerInterceptor {
     private final UserService userService;
 
     @Autowired
-    public AutoSingInterceptor(UserService userService) {
+    public AutoSignInterceptor(UserService userService) {
         this.userService = userService;
     }
 
@@ -26,7 +26,7 @@ public class AutoSingInterceptor implements HandlerInterceptor {
         if (userDto == null && request.getCookies() != null) {
             Cookie autoSignKeyCookie = null;
             for (Cookie cookie : request.getCookies()) {
-                if (cookie.getName().equals("ask")) {
+                if (cookie.getName().equals("Autologin")) {
                     autoSignKeyCookie = cookie;
                     break;
                 }
