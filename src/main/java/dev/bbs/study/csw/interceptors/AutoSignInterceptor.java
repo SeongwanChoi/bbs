@@ -3,6 +3,7 @@ package dev.bbs.study.csw.interceptors;
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.Cookie;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@Component
 public class AutoSignInterceptor implements HandlerInterceptor {
     private final UserService userService;
 
