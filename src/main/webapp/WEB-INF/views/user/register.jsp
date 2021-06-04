@@ -15,7 +15,6 @@
     <script src="/resource/scripts/user/register.js"></script>
 </head>
 <body class="register">
-<%@ include file="/WEB-INF/views/header.jsp"%>
 <form action="/user/register" id="register-form" method="post">
     <label>
         <span hidden>이메일</span>
@@ -83,7 +82,6 @@
     <br>
     <input type="submit" value="회원가입">
 </form>
-<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>
 

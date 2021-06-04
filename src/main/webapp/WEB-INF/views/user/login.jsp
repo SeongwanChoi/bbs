@@ -1,6 +1,6 @@
 <%@ page import="dev.bbs.study.csw.enums.LoginResult" %>
 <%@ page contentType="text/html" language="java" trimDirectiveWhitespaces="true" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -64,13 +64,12 @@
     <input type="submit" value="로그인">
     <br>
     <label>
-        <input type="checkbox" name="autoSign">
-        <span>자동 로그인</span>
+        <input style="zoom: 2.0;" type="checkbox" name="autoSign">
+        <span>로그인 상태 유지</span>
     </label>
-
     <div>
-        <a class="login-side">이메일 찾기</a>
-        <a class="login-side">비밀번호 찾기</a>
+        <a>이메일 찾기</a>
+        <a>비밀번호 찾기</a>
         <a class="login-side" href="register">회원가입</a>
     </div>
 </form>

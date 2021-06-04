@@ -1,0 +1,45 @@
+body.main > div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(25rem);
+}
+
+body.main > div > div {
+    position: absolute;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #a9a9a9;
+    padding: 1rem;
+}
+
+body.main > div > div > span {
+    margin-bottom: 1rem;
+    font-weight: 100;
+    transform: translateX(-110px);
+    color: gray;
+}
+
+body.main > div > div > a {
+    background-color: #a9a9a9;
+    padding: 1.5rem 10rem;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+body.main > div > div > div {
+    margin-top: 1rem;
+    color: gray;
+    transform: translateX(-90px);
+}
+
+body.main > div > div > div > a:hover {
+    border-bottom: 1px solid;
+}
+
+

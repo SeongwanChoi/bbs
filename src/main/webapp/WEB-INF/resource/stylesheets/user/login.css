@@ -51,8 +51,20 @@ body.login > form > input {
     padding-left: 180px;
     padding-right: 180px;
     text-align: center;
-    background-color: darkgray;
+    background-color: #a9a9a9;
     color: white;
     border: none;
     font-size: 16px;
+}
+
+body.login > form > input:hover {
+    background-color: #909090;
+}
+
+body.login > form > label {
+    transform: translateX(-8rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
