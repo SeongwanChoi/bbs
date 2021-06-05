@@ -22,14 +22,14 @@ public class UserService {
         public static final int AUTO_SIGN_VALID_DAYS = 7; // 자동로그인 최대 적용기간
     }
 
-    private final IUserModel userModel;
+    private final IUserModel userModel; // 모델 연결
 
     @Autowired
     public UserService(IUserModel userModel) {
         this.userModel = userModel;
     }
 
-    private static class Regex {
+    private static class Regex { // 정규식들
         public static final String EMAIL = "^(?=.{8,50}$)([0-9a-z]([_]?[0-9a-z])*?)@([0-9a-z][0-9a-z\\-]*[0-9a-z]\\.)?([0-9a-z][0-9a-z\\-]*[0-9a-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$";
         public static final String PASSWORD = "^([0-9a-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'\",<.>/?]{4,100})$";
         public static final String NICKNAME = "^([0-9a-zA-Z가-힣]{2,10})$";
@@ -100,11 +100,11 @@ public class UserService {
         loginVo.setLoginResult(LoginResult.SUCCESS);
         loginVo.setUserDto(userDto);
         return;
-    } // 승인될경우 승인결과 (SUCCESS) 넣어주고 DTO에 있는 유저정보(본인) 넘겨줌
+    } // 승인될경우 승인결과 (SUCCESS) 넣어주고 Dto에 있는 유저정보(본인) 넘겨줌
 
     public UserDto login(Cookie autoSignKeyCookie) { // 자동로그인 사용
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
-            return null;
+            return null; // key 정규식 검사
         } // 키 값 정규식 확인
         UserDto userDto = this.userModel.selectUserFromCookie(autoSignKeyCookie.getValue()); // DB에서 확인될경우 DTO를 가져옴
         if (userDto == null || userDto.getLevel() == 10) { // DTO가 null이거나(유저정보 없음) || Level값이 10이상(잠금유저)

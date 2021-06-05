@@ -17,9 +17,10 @@
     <div>
         <div>
             <c:choose>
-                <c:when test="${vo.loginResult == LoginResult.SUCCESS}">
+                <c:when test="${vo == LoginResult.SUCCESS}">
+                    <a href="https://icons8.com/icon/84020/user">User icon by Icons8</a>
                 </c:when>
-                <c:when test="${vo.loginResult != LoginResult.SUCCESS}">
+                <c:when test="${vo != LoginResult.SUCCESS}">
                     <span>접속할려면 로그인하세요</span>
                     <a href="/user/login">로그인</a>
                     <div>
