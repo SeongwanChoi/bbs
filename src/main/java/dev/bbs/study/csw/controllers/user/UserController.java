@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -67,7 +69,6 @@ public class UserController {
                 response.addCookie(cookie);
             }
             model.addAttribute(UserDto.NAME, loginVo.getUserDto());
-            model.addAttribute("vo", loginVo.getLoginResult());
             return "redirect:/";
         } else {
             model.addAttribute("vo", loginVo);
@@ -106,5 +107,14 @@ public class UserController {
         }
     }
 
+    @RequestMapping(
+            value = "/logout",
+            method =RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String logoutGet(
+            SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        return "redirect:/";
+    }
 
 }
