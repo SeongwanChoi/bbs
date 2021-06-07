@@ -15,27 +15,21 @@
 </head>
 <body class="main">
     <div>
+        <div>
             <c:choose>
-                <c:when test="${user != null}">
-                    <div style="padding: 2rem 10rem; background-color: #f7f9fa;">
-                        <img src="https://img.icons8.com/material-sharp/50/000000/user.png"/>
-                        <a class="userNickname">${user.nickname}님</a>
-                        <a class="myInfo">내정보</a>
-                        <a class="logout">로그아웃</a>
-                    </div>
+                <c:when test="${vo.loginResult == LoginResult.SUCCESS}">
                 </c:when>
-                <c:when test="${user == null}">
+                <c:when test="${vo.loginResult != LoginResult.SUCCESS}">
+                    <span>접속할려면 로그인하세요</span>
+                    <a href="/user/login">로그인</a>
                     <div>
-                        <span>접속할려면 로그인하세요</span>
-                        <a class="loginButton" href="/user/login">로그인</a>
-                        <div>
-                            <a>아이디</a>
-                            <a>비밀번호 찾기</a>
-                            <a class="register" href="/user/register">회원가입</a>
-                        </div>
+                        <a>아이디</a>
+                        <a>비밀번호 찾기</a>
+                        <a class="register" href="/user/register">회원가입</a>
                     </div>
                 </c:when>
             </c:choose>
+        </div>
     </div>
 </body>
 </html>

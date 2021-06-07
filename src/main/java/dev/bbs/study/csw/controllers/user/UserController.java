@@ -67,6 +67,7 @@ public class UserController {
                 response.addCookie(cookie);
             }
             model.addAttribute(UserDto.NAME, loginVo.getUserDto());
+            model.addAttribute("vo", loginVo.getLoginResult());
             return "redirect:/";
         } else {
             model.addAttribute("vo", loginVo);
