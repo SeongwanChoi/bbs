@@ -24,7 +24,7 @@ body.main > div > div > span {
     color: gray;
 }
 
-body.main > div > div > a {
+body.main > div > div > a.loginButton {
     background-color: #a9a9a9;
     padding: 1.5rem 10rem;
     color: #ffffff;
@@ -41,5 +41,37 @@ body.main > div > div > div {
 body.main > div > div > div > a:hover {
     border-bottom: 1px solid;
 }
+/*------------------------------------------------ success*/
+body.main > div > div > img {
+    transform: translate(-140px, -20px)
+}
 
+body.main > div > div > a.userNickname {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    transform: translate(-65px, -65px);
+
+}
+
+body.main > div > div > a.myInfo {
+    font-size: 10px;
+    transform: translateY(-80px);
+    border-left: 1px solid #a9a9a9;
+    color: #505050;
+    padding-left: 10px;
+}
+
+body.main > div > div > a.logout {
+    background-color: #ccd0d4;
+    color: #ffffff;
+    font-size: 11px;
+    padding: 6px 10px 6px 11px;
+    border-radius: 14px;
+    transform: translate(140px, -95px);
+}
+
+body.main > div > div > a.logout:hover {
+    background-color: #b4b9bf;
+}
 
