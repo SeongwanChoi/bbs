@@ -7,6 +7,7 @@ import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -112,8 +114,21 @@ public class UserController {
             method =RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public String logoutGet(
-            SessionStatus sessionStatus) {
+            SessionStatus sessionStatus,
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request,
+            HttpServletResponse response) {
         sessionStatus.setComplete();
+        if (userDto != null) {
+            Cookie autoSignKeyCookie = null;
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("Autologin")) {
+                    autoSignKeyCookie = cookie;
+                    break;
+                }
+            }
+
+        }
         return "redirect:/";
     }
 
