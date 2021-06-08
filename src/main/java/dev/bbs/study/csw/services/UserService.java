@@ -126,11 +126,18 @@ public class UserService {
         userDto.setAutoSignKey(key); // 최종적으로 해쉬화로 생성된 키를 DTO의 AutosignKey로 set 시킴
     }
 
-    public void extendAutoSignKey(Cookie autoSignKeyCookie) {
+    public void extendAutoSignKey(Cookie autoSignKeyCookie) { // 자동로그인 만료기간 업데이트
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return;
         } // 키 값 정규식 확인
         this.userModel.updateAutoSignKeyDay(autoSignKeyCookie.getValue(), Config.AUTO_SIGN_VALID_DAYS); // 통과한 키 값의 유효기간 업데이트
+    }
+
+    public void expireAutoSignKey(Cookie autoSignKeyCookie) {
+        if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
+            return;
+        }
+        this.userModel.updateAutoSignKeyExpiry(autoSignKeyCookie.getValue());
     }
 
     public void register(RegisterVo registerVo) { // 회원가입

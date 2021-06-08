@@ -118,7 +118,6 @@ public class UserController {
             @ModelAttribute(UserDto.NAME) UserDto userDto,
             HttpServletRequest request,
             HttpServletResponse response) {
-        sessionStatus.setComplete();
         if (userDto != null) {
             Cookie autoSignKeyCookie = null;
             for (Cookie cookie : request.getCookies()) {
@@ -127,8 +126,14 @@ public class UserController {
                     break;
                 }
             }
-
+            if (autoSignKeyCookie != null) {
+            this.userService.expireAutoSignKey(autoSignKeyCookie);
+            autoSignKeyCookie.setMaxAge(0);
+            autoSignKeyCookie.setPath("/");
+            response.addCookie(autoSignKeyCookie);
+            }
         }
+        sessionStatus.setComplete();
         return "redirect:/";
     }
 

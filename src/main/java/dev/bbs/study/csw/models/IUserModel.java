@@ -27,4 +27,7 @@ public interface IUserModel {
     void updateAutoSignKeyDay(
             @Param("key") String key,
             @Param("days") int days); // 자동로그인 정상 사용시 유효기간 초기화
+
+    void updateAutoSignKeyExpiry(
+            @Param("key") String key); // 자동로그인 종료
 }

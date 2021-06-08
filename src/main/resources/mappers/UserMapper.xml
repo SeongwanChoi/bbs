@@ -80,4 +80,11 @@
           AND `expired_flag` = FALSE
         LIMIT 1
     </update>
+
+    <update id="updateAutoSignKeyExpiry">
+        UPDATE `git_bbs`.`login_auto_sign_keys`
+        SET `expired_flag` = 1
+        WHERE `key` = #{key}
+        LIMIT 1
+    </update>
 </mapper>
