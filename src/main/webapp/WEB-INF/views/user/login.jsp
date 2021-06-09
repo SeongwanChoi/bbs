@@ -19,58 +19,67 @@
 <form id="login-form" method="post" action="/user/login">
     <div class="title">
         <a class="login-text" href="login" target="_self">LOGIN</a>
-        <div class="login-welcome">WELCOME BACK</div>
+        <span class="login-welcome">WELCOME BACK</span>
     </div>
     <div>
-        <div class="email">
-            <label>
-                <span hidden>이메일</span>
-                <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${vo.email}">
-            </label>
-            <br>
-            <c:choose>
-                <c:when test="${vo.loginResult == LoginResult.EMAILBlank}">
-                    <span style="color: red; display: block;">이메일을 입력해주세요.</span>
-                </c:when>
-                <c:when test="${vo.loginResult != LoginResult.EMAILBlank}">
-                    <span style="display: none;">이메일을 입력해주세요.</span>
-                </c:when>
-            </c:choose>
+        <div class="text-box">
+            <div class="email">
+                <label>
+                    <span hidden>이메일</span>
+                    <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${vo.email}">
+                </label>
+                <br>
+                <c:choose>
+                    <c:when test="${vo.loginResult == LoginResult.EMAILBlank}">
+                        <span style="color: red; display: block;">이메일을 입력해주세요.</span>
+                    </c:when>
+                    <c:when test="${vo.loginResult != LoginResult.EMAILBlank}">
+                        <span style="display: none;">이메일을 입력해주세요.</span>
+                    </c:when>
+                </c:choose>
+            </div>
+            <div class="password">
+                <label>
+                    <span hidden>비밀번호</span>
+                    <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${vo.password}">
+                </label>
+                <br>
+                <c:choose>
+                    <c:when test="${vo.loginResult != LoginResult.PASSWORDBlank}">
+                        <span style="display: none;">비밀번호를 입력해주세요.</span>
+                    </c:when>
+                    <c:when test="${vo.loginResult == LoginResult.PASSWORDBlank}">
+                        <span style="color: red; display: block;">비밀번호를 입력해주세요.</span>
+                    </c:when>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${vo.loginResult == LoginResult.NONE}">
+                        <span style="display: block; color: red;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+                    </c:when>
+                    <c:when test="${vo.loginResult != LoginResult.NONE}">
+                        <span style="display: none;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
+                    </c:when>
+                </c:choose>
+            </div>
         </div>
-        <div class="password">
+        <input type="submit" value="로그인">
+        <p>
             <label>
-                <span hidden>비밀번호</span>
-                <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${vo.password}">
+                <input type="checkbox" name="autoSign">
+                <span>로그인 상태 유지</span>
             </label>
-            <br>
-            <c:choose>
-                <c:when test="${vo.loginResult != LoginResult.PASSWORDBlank}">
-                    <span style="display: none;">비밀번호를 입력해주세요.</span>
-                </c:when>
-                <c:when test="${vo.loginResult == LoginResult.PASSWORDBlank}">
-                    <span style="color: red; display: block;">비밀번호를 입력해주세요.</span>
-                </c:when>
-            </c:choose>
-            <c:choose>
-                <c:when test="${vo.loginResult == LoginResult.NONE}">
-                    <span style="display: block; color: red;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
-                </c:when>
-                <c:when test="${vo.loginResult != LoginResult.NONE}">
-                    <span style="display: none;">이메일 혹은 비밀번호가 올바르지 않습니다.</span>
-                </c:when>
-            </c:choose>
-        </div>
-    </div>
-    <input type="submit" value="로그인">
-    <br>
-    <label>
-        <input style="zoom: 2.0;" type="checkbox" name="autoSign">
-        <span>로그인 상태 유지</span>
-    </label>
-    <div>
-        <a>이메일 찾기</a>
-        <a>비밀번호 찾기</a>
-        <a class="login-side" href="register">회원가입</a>
+        </p>
+        <ul>
+            <li>
+                <a>이메일 찾기</a>
+            </li>
+            <li>
+                <a>비밀번호 찾기</a>
+            </li>
+            <li>
+                <a class="login-side" href="register">회원가입</a>
+            </li>
+        </ul>
     </div>
 </form>
 </body>

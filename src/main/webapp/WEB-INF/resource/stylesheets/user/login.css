@@ -1,70 +1,99 @@
 body.login > form {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 40vh;
-    justify-content: flex-end;
+    position: absolute;
+    left: 38%;
+    top: 23%;
 }
 
 body.login > form > div.title > a.login-text {
+    display: block;
+    clear: both;
+    margin: 0 0 10px;
+    border-bottom: 0;
+    text-align: center;
     font-size: 35px;
     font-weight: 400;
     color: #333;
-    margin: 0 0 10px;
-    text-align: center;
-}
-
-body.login > form > div.title > div.login-welcome {
-    color: #999;
-    margin: 0 0 40px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
     letter-spacing: -0.03em;
 }
 
-body.login > form > div > div.email {
-    margin-bottom: 5px;
+body.login > form > div.title > span.login-welcome {
+    display: block;
+    clear: both;
+    margin: 0 0 30px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+    letter-spacing: -0.03em;
 }
 
-body.login > form > div > div > label > input {
-    width: 321px;
-    height: 45px;
-    padding: 2px 65px 2px 20px;
+body.login > form > div > div.text-box {
+    text-align: center;
+}
+
+body.login > form > div > div.text-box > div {
+    display: block;
+    margin: 0 0 10px;
+}
+
+body.login > form > div > div.text-box > div > label > input {
+    width: 23rem;
+    height: 3rem;
+    padding: 2px 10px 2px 10px;
     border: 1px solid #ddd;
     color: #333;
     font-size: 14px;
     line-height: 45px;
     letter-spacing: 0.08em;
     font-weight: normal;
-}
-
-body.login > form > div > div > label > input:focus {
     outline: none;
-    border-color: #10151a;
 }
 
-body.login > form > input {
-    transform: translateY(10px);
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 180px;
-    padding-right: 180px;
-    text-align: center;
-    background-color: #a9a9a9;
-    color: white;
+body.login > form > div > div.text-box > div > label > input:focus {
+    border: 1px solid ;
+}
+
+body.login > form > div > input {
+    padding: 1rem 10rem;
+    position: relative;
+    display: block;
+    margin: 20px 0 10px;
     border: none;
-    font-size: 16px;
+    color: #fff;
+    font-size: 1.5rem;
+    background-color: slategray;
 }
 
-body.login > form > input:hover {
-    background-color: #909090;
+body.login > form > div > input:hover {
+    background-color: lightslategray;
 }
 
-body.login > form > label {
-    transform: translateX(-8rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+body.login > form > div > p {
+    padding: 0 0 0 5px;
+    margin: 20px 0 20px;
+    color: #666;
+}
+
+body.login > form > div > p > label > span {
+    font-size: 0.75rem;
+}
+
+body.login > form > div > ul {
+    display: block;
+    margin: 0 0 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+body.login > form > div > ul > li {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 9px 0 13px;
+}
+
+body.login > form > div > ul > li > a {
+    font-size: 0.75rem;
+    color: #999999;
 }
