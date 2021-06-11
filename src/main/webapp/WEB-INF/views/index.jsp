@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/index.css">
 </head>
+
 <body class="main">
+<%@ include file="border.jsp"%>
     <div>
             <c:choose>
                 <c:when test="${user != null}">
                     <div>
-                        <img src="https://img.icons8.com/material-sharp/24/000000/user.png"/>
+                        <img src="https://img.icons8.com/material-sharp/24/000000/user.png" alt=""/>
                         <a class="logout" href="/user/logout">로그아웃</a>
                     </div>
                 </c:when>
