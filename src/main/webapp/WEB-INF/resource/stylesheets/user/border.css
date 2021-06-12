@@ -1,3 +1,17 @@
+header.border > div.border01 > div > ul.sns {
+    position: absolute;
+    left: 20%;
+}
+
 header.border > div.border01 > div > ul.sns > li {
+    float: left;
+}
+
+header.border > div.border01 > div > div > ul.menu {
+    position: absolute;
+    left: 60%;
+}
+
+header.border > div.border01 > div > div > ul.menu > li {
     float: left;
 }
