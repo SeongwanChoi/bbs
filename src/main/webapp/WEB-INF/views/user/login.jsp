@@ -16,9 +16,9 @@
     <script src="resource/scripts/user/login.js"></script>
 
 </head>
-<body class="login">
+<body class="lost_email">
 <%@ include file="../border.jsp"%>
-<form id="login-form" method="post" action="/user/login">
+<form method="post" action="/user/lost_email">
     <div class="title">
         <a class="login-text" href="login" target="_self">LOGIN</a>
         <span class="login-welcome">WELCOME BACK</span>
@@ -73,7 +73,7 @@
         </p>
         <ul>
             <li>
-                <a>이메일 찾기</a>
+                <a href="lost_email">이메일 찾기</a>
             </li>
             <li>
                 <a>비밀번호 찾기</a>

@@ -5,6 +5,7 @@ import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
+import dev.bbs.study.csw.vos.Lost_emailVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -36,6 +37,37 @@ public class UserController {
     @ModelAttribute(UserDto.NAME)
     private UserDto userDto() {
         return null;
+    }
+
+    @RequestMapping(
+            value = "/register",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String registerGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        return "user/register";
+    }
+
+    @RequestMapping(
+            value = "/register",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String registerPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            RegisterVo registerVo,
+            Model model) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        this.userService.register(registerVo);
+        if (registerVo.getResult() == RegisterResult.SUCCESS) {
+            return "user/register.success";
+        } else {
+            model.addAttribute("registerVo", registerVo);
+            return "user/register";
+        }
     }
 
     @RequestMapping(
@@ -79,37 +111,6 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/register",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public String registerGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
-            if (userDto != null) {
-                return "redirect:/";
-            }
-        return "user/register";
-    }
-
-    @RequestMapping(
-            value = "/register",
-            method = RequestMethod.POST,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public String registerPost(
-            @ModelAttribute(UserDto.NAME) UserDto userDto,
-            RegisterVo registerVo,
-            Model model) {
-        if (userDto != null) {
-            return "redirect:/";
-        }
-        this.userService.register(registerVo);
-        if (registerVo.getResult() == RegisterResult.SUCCESS) {
-            return "user/register.success";
-        } else {
-            model.addAttribute("registerVo", registerVo);
-            return "user/register";
-        }
-    }
-
-    @RequestMapping(
             value = "/logout",
             method =RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -137,4 +138,29 @@ public class UserController {
         return "redirect:/";
     }
 
+
+    @RequestMapping(
+            value = "lost_email",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostEmailGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        return "user/lost_email";
+    }
+
+    @RequestMapping(
+            value = "lost_email",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostEmailPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request,
+            Lost_emailVo lostEmailVo) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        lostEmailVo.setIp(request.getRemoteAddr());
+    }
 }
