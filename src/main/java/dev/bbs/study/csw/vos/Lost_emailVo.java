@@ -35,4 +35,8 @@ public class Lost_emailVo {
     public void setEmail(String email) {
         this.email = email;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0800764 (commit)

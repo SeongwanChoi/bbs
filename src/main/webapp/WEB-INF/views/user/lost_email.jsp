@@ -9,6 +9,7 @@
     <title>이메일 찾기</title>
 </head>
 <body>
+<<<<<<< HEAD
     <div>
         <form>
             <div></div>
@@ -23,5 +24,21 @@
             <input type="button" name="확인" placeholder="확인">
         </form>
     </div>
+=======
+<div>
+    <form>
+        <div></div>
+        <label>
+            <span></span>
+            <input>
+        </label>
+        <label>
+            <span></span>
+            <input>
+        </label>
+        <input type="button" name="확인" placeholder="확인">
+    </form>
+</div>
+>>>>>>> 0800764 (commit)
 </body>
 </html>
