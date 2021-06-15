@@ -5,16 +5,14 @@ import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
+import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.Cookie;
@@ -136,5 +134,30 @@ public class UserController {
         sessionStatus.setComplete();
         return "redirect:/";
     }
+    @RequestMapping(
+            value = "/lost_email",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String lostEmailGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        return "user/lost_email";
+    }
 
+    @ResponseBody
+    @RequestMapping(
+            value = "/lost_email/send-code",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostEmailSendPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request,
+            Lost_emailSendCodeVo lostEmailSendCodeVo) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        lostEmailSendCodeVo.setIp(request.getRemoteAddr());
+        this.userService
+    }
 }

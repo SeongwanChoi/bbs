@@ -14,11 +14,10 @@
     <link rel="stylesheet" href="/resource/stylesheets/user/login.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/border.css">
     <script src="resource/scripts/user/login.js"></script>
-
 </head>
-<body class="lost_email">
+<body class="login">
 <%@ include file="../border.jsp"%>
-<form method="post" action="/user/lost_email">
+<form method="post" action="/user/login">
     <div class="title">
         <a class="login-text" href="login" target="_self">LOGIN</a>
         <span class="login-welcome">WELCOME BACK</span>
