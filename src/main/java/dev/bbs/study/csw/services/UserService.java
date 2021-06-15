@@ -2,10 +2,12 @@ package dev.bbs.study.csw.services;
 
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.enums.LoginResult;
+import dev.bbs.study.csw.enums.Lost_emailSendCodeResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.models.IUserModel;
 import dev.bbs.study.csw.util.CryptoUtil;
 import dev.bbs.study.csw.vos.LoginVo;
+import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,11 +135,11 @@ public class UserService {
         this.userModel.updateAutoSignKeyDay(autoSignKeyCookie.getValue(), Config.AUTO_SIGN_VALID_DAYS); // 통과한 키 값의 유효기간 업데이트
     }
 
-    public void expireAutoSignKey(Cookie autoSignKeyCookie) {
+    public void expireAutoSignKey(Cookie autoSignKeyCookie) { // 자동로그인 종료 업데이트
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return;
-        }
-        this.userModel.updateAutoSignKeyExpiry(autoSignKeyCookie.getValue());
+        } // 키 값 정규식 확인
+        this.userModel.updateAutoSignKeyExpiry(autoSignKeyCookie.getValue()); // 통과한 경우 expired_flag 를 1로 만들어 사용 종료시킴
     }
 
     public void register(RegisterVo registerVo) { // 회원가입
@@ -173,4 +175,15 @@ public class UserService {
     public int getNicknameCount(String nickname) {
         return this.userModel.selectNicknameCount(nickname);
     } // DB에서 닉네임 중복검사 (0 or 1)
+
+    public void send(Lost_emailSendCodeVo lostEmailSendCodeVo) {
+        if (!UserService.checkNameFirst(lostEmailSendCodeVo.getNameFirst()) ||
+                !UserService.checkNameLast(lostEmailSendCodeVo.getNameLast()) ||
+                !UserService.checkContactFirst(lostEmailSendCodeVo.getContactFirst()) ||
+                !UserService.checkContactSecond(lostEmailSendCodeVo.getContactSecond()) ||
+                !UserService.checkContactThird(lostEmailSendCodeVo.getContactThird())) {
+            lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
+            return;
+        }
+    }
 }
