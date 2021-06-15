@@ -158,6 +158,6 @@ public class UserController {
             return "redirect:/";
         }
         lostEmailSendCodeVo.setIp(request.getRemoteAddr());
-        this.userService
+        this.userService.asdf
     }
 }
