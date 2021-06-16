@@ -40,8 +40,7 @@
                `level`             AS `level`
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
-          AND `password` = #{hashedPassword}
-        LIMIT 1
+          AND `password` = #{hashedPassword} LIMIT 1
     </select>
 
     <insert id="insertAutoSignKey">
@@ -68,8 +67,7 @@
                  LEFT JOIN `git_bbs`.`users` AS `user` ON `key`.`user_email` = `user`.`email`
         WHERE `key`.`key` = #{key}
           AND `key`.`expires_key` > NOW()
-          AND `key`.`expired_flag` = FALSE
-        LIMIT 1
+          AND `key`.`expired_flag` = FALSE LIMIT 1
     </select>
 
     <update id="updateAutoSignKeyDay">
@@ -77,14 +75,24 @@
         SET `expires_key` = DATE_ADD(NOW(), INTERVAL #{days} DAY)
         WHERE `key` = #{key}
           AND `expires_key` > NOW()
-          AND `expired_flag` = FALSE
-        LIMIT 1
+          AND `expired_flag` = FALSE LIMIT 1
     </update>
 
     <update id="updateAutoSignKeyExpiry">
         UPDATE `git_bbs`.`login_auto_sign_keys`
         SET `expired_flag` = 1
-        WHERE `key` = #{key}
-        LIMIT 1
+        WHERE `key` = #{key} LIMIT 1
     </update>
+
+    <select id="selectEmail" parameterType="dev.bbs.study.csw.vos.Lost_emailSendCodeVo" resultType="String">
+        SELECT `email`
+        FROM `git_bbs`.`users`
+        WHERE `name_first` = #{nameFirst}
+          AND `name_optional` = #{nameOptional}
+          AND `name_last` = #{nameLast}
+          AND `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
+          LIMIT 1
+    </select>
 </mapper>

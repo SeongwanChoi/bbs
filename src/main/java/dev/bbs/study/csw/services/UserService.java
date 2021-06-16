@@ -22,6 +22,8 @@ public class UserService {
     public static class Config {
         public static final int AUTO_SIGN_KEY_HASH_COUNT = 10; // 해쉬암호화 재조정 횟수 (보안)
         public static final int AUTO_SIGN_VALID_DAYS = 7; // 자동로그인 최대 적용기간
+
+        public static final int AUTH_CODE_HASH_COUNT = 9; // email찾기 기능 auth코드 생성 해쉬 재조정 횟수
     }
 
     private final IUserModel userModel; // 모델 연결
@@ -184,6 +186,15 @@ public class UserService {
                 !UserService.checkContactThird(lostEmailSendCodeVo.getContactThird())) {
             lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
             return;
+        }
+        String email = this.userModel.selectEmail(lostEmailSendCodeVo);
+        if (email == null) {
+            lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
+        }
+        String code = String.valueOf((int) (Math.random() * Math.pow(10, 6)));
+        String key = String.format("%s|%s", email, code);
+        for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
+            key = CryptoUtil.Sha512.hash(key, null);
         }
     }
 }

@@ -2,6 +2,7 @@ package dev.bbs.study.csw.models;
 
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.vos.LoginVo;
+import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,8 @@ public interface IUserModel {
 
     void updateAutoSignKeyExpiry(
             @Param("key") String key); // 자동로그인 종료
+
+    String selectEmail(Lost_emailSendCodeVo lostEmailSendCodeVo);
+
+
 }
