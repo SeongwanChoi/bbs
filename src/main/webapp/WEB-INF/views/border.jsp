@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="border02">SNIPER#</div>
+    <div class="border02"><a href="/">SNIPER#</a></div>
     <div class="border03">
         <ul>
             <li>NEW</li>

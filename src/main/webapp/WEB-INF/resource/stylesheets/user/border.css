@@ -60,7 +60,7 @@ header.border > div.border01 > div > div > ul.menu > input:hover {
     background-color: #ddd;
 }
 
-header.border > div.border02 {
+header.border > div.border02 > a {
     font-size: 3rem;
     text-align: center;
     font-weight: 600;
