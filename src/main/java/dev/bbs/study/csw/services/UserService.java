@@ -8,6 +8,7 @@ import dev.bbs.study.csw.models.IUserModel;
 import dev.bbs.study.csw.util.CryptoUtil;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
+import dev.bbs.study.csw.vos.Lost_emailVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserService {
         public static final int AUTO_SIGN_VALID_DAYS = 7; // 자동로그인 최대 적용기간
 
         public static final int AUTH_CODE_HASH_COUNT = 9; // email찾기 기능 auth코드 생성 해쉬 재조정 횟수
+        public static final int AUTH_CODE_VALID_MINUTES = 5; // 찾기 인증번호 최대사용시간
     }
 
     private final IUserModel userModel; // 모델 연결
@@ -46,6 +48,9 @@ public class UserService {
         public static final String ADDRESS_PRIMARY = "^([0-9a-zA-Z가-힣\\- ]{10,100})$";
 
         public static final String AUTO_SIGN_KEY = "^([0-9a-z]{128})$";
+
+        public static final String AUTH_CODE_KEY = "^([0-9a-z]{128})$";
+        public static final String AUTH_CODE = "^([0-9]{6})$";
     }
 
     public static boolean checkEmail(String email) {
@@ -76,6 +81,13 @@ public class UserService {
     }
     public static boolean checkAddressPrimary(String addressPrimary) {
         return addressPrimary.matches(Regex.ADDRESS_PRIMARY);
+    }
+
+    public static boolean checkAuthCodeKey(String authCodeKey) {
+        return authCodeKey.matches(Regex.AUTH_CODE_KEY);
+    }
+    public static boolean checkAuth(String authCode) {
+        return authCode.matches(Regex.AUTH_CODE);
     }
 
     public void login(LoginVo loginVo) { // 로그인
@@ -196,5 +208,24 @@ public class UserService {
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
         }
+        this.userModel.insertLostEmailAuthCode(key, lostEmailSendCodeVo.getIp(), email, code, Config.AUTH_CODE_VALID_MINUTES);
+        lostEmailSendCodeVo.setKey(key);
+        lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.SENT);
     }
+
+    public void findEmail(Lost_emailVo lostEmailVo) {
+        if (!UserService.checkAuth(lostEmailVo.getAuthCode()) ||
+                !UserService.checkAuthCodeKey(lostEmailVo.getKey())) {
+            return;
+        }
+        String email = this.userModel.selectEmailByAuthCodeFromEmail(
+                lostEmailVo.getAuthCode(),
+                lostEmailVo.getKey(),
+                lostEmailVo.getIp());
+        if (email != null) {
+            this.userModel.updateEmailAuthCodeExpired(lostEmailVo.getKey());
+        }
+        lostEmailVo.setEmail(email);
+    }
+
 }

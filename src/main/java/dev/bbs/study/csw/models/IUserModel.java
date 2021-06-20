@@ -32,7 +32,20 @@ public interface IUserModel {
     void updateAutoSignKeyExpiry(
             @Param("key") String key); // 자동로그인 종료
 
-    String selectEmail(Lost_emailSendCodeVo lostEmailSendCodeVo);
+    String selectEmail(Lost_emailSendCodeVo lostEmailSendCodeVo); // 이메일 찾음(AuthCode로 씀)
 
+    void insertLostEmailAuthCode( // 인증키로 이메일 찾음
+            @Param("email") String email,
+            @Param("code") String code,
+            @Param("key") String key,
+            @Param("ip") String ip,
+            @Param("minutes") int minutes);
 
+    String selectEmailByAuthCodeFromEmail( // 인증키로 Email찾아서 줌
+            @Param("authCode") String authCode,
+            @Param("key") String key,
+            @Param("ip") String ip);
+
+    void updateEmailAuthCodeExpired(
+            @Param("key") String key);
 }

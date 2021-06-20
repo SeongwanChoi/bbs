@@ -92,7 +92,28 @@
           AND `name_last` = #{nameLast}
           AND `contact_first` = #{contactFirst}
           AND `contact_second` = #{contactSecond}
-          AND `contact_third` = #{contactThird}
-          LIMIT 1
+          AND `contact_third` = #{contactThird} LIMIT 1
     </select>
+
+    <insert id="insertLostEmailAuthCode">
+        INSERT INTO `git_bbs`.`lost_email` (`email`, `code`, `key`, `ip`, `expires_at`)
+            VALUE ( #{email}, #{code}, #{key}, #{ip}, DATE_ADD(NOW(), INTERVAL #{minutes} MINUTE))
+    </insert>
+
+    <select id="selectEmailByAuthCodeFromEmail" resultType="String">
+        SELECT `email`
+        FROM `git_bbs`.`lost_email`
+        WHERE `code` = #{authCode}
+          AND `key` = #{key}
+          AND `ip` = #{ip}
+          AND `expires_at` = NOW()
+          AND `expired_flag` = FALSE
+    </select>
+
+    <update id="updateEmailAuthCodeExpired">
+        UPDATE `git_bbs`.`lost_email`
+        SET `expired_flag` = TRUE
+        WHERE `key` = #{key}
+        LIMIT 1
+    </update>
 </mapper>
