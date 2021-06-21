@@ -41,11 +41,11 @@ public interface IUserModel {
             @Param("ip") String ip,
             @Param("minutes") int minutes);
 
-    String selectEmailByAuthCodeFromEmail( // 인증키로 Email찾아서 줌
+    String selectEmailByAuthCodeFromEmail( // 인증키로 이메일 찾기 줌
             @Param("authCode") String authCode,
             @Param("key") String key,
             @Param("ip") String ip);
 
-    void updateEmailAuthCodeExpired(
+    void updateEmailAuthCodeExpired( // 이메일 찾았으면 인증키 비활성화
             @Param("key") String key);
 }

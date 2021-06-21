@@ -10,7 +10,7 @@
 </head>
 <body>
     <div>
-        <form>
+        <form id="emailLost-Form">
             <div></div>
             <label>
                 <span hidden>이름</span>
@@ -37,7 +37,7 @@
                 <span hidden>연락처(끝)</span>
                 <input maxlength="4" name="contactThird" type="number" placeholder="연락처(끝)" value="${registerVo.contactThird}">
             </label>
-            <input type="button" name="다음" value="다음">
+            <input id="sendCodeButton" type="button" name="다음" value="다음">
         </form>
     </div>
 </body>
