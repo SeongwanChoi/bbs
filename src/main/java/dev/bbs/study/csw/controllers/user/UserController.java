@@ -6,7 +6,10 @@ import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.services.UserService;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
+import dev.bbs.study.csw.vos.Lost_emailVo;
 import dev.bbs.study.csw.vos.RegisterVo;
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
@@ -147,6 +150,24 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(
+            value = "/lost_email",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostEmailPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request,
+            Lost_emailVo lostEmailVo
+    ) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        lostEmailVo.setIp(request.getRemoteAddr());
+        this.userService.findEmail(lostEmailVo);
+        return
+    }
+
+    @ResponseBody
+    @RequestMapping(
             value = "/lost_email/send-code",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -158,7 +179,12 @@ public class UserController {
             return "redirect:/";
         }
         lostEmailSendCodeVo.setIp(request.getRemoteAddr());
-        return null;
+        this.userService.send(lostEmailSendCodeVo);
+
+        JSONObject respJson = new JSONObject();
+        respJson.put("result", lostEmailSendCodeVo.getResult());
+        respJson.put("key", lostEmailSendCodeVo.getKey());
+        return respJson.toString();
     }
 
 }
