@@ -6,6 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../resource/scripts/class.ajax.js"></script>
     <script src="../resource/scripts/user/emailLost.js"></script>
     <title>이메일 찾기</title>
 </head>
@@ -38,7 +39,7 @@
                 <span hidden>연락처(끝)</span>
                 <input maxlength="4" name="contactThird" type="number" placeholder="연락처(끝)" value="${registerVo.contactThird}">
             </label>
-            <input id="sendCodeButton" type="button" name="다음" value="다음">
+            <input name="sendCodeButton" type="button" value="다음">
             <br>
             <label hidden rel="authCode">
                 <span hidden >인증코드</span>

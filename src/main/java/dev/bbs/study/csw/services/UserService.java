@@ -200,6 +200,7 @@ public class UserService {
             return;
         }
         String email = this.userModel.selectEmail(lostEmailSendCodeVo);
+        System.out.println(email);
         if (email == null) {
             lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
         }
@@ -208,7 +209,7 @@ public class UserService {
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
         }
-        this.userModel.insertLostEmailAuthCode(key, lostEmailSendCodeVo.getIp(), email, code, Config.AUTH_CODE_VALID_MINUTES);
+        this.userModel.insertLostEmailAuthCode(email, code, key, lostEmailSendCodeVo.getIp(), Config.AUTH_CODE_VALID_MINUTES);
         lostEmailSendCodeVo.setKey(key);
         lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.SENT);
     }

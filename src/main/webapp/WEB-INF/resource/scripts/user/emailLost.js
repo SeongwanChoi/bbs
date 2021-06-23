@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const callback = (resp) =>{
                 const respJson = JSON.parse(resp);
                 switch (respJson['result']) {
-                    case 'sent' :
+                    case 'SENT' :
                         emailLostForm.querySelectorAll('input').forEach(input => {
                             if (input.getAttribute('name') !== 'authCode' &&
                                 input.getAttribute('name') !== 'submit') {
