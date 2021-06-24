@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         emailLostForm['key'].value = respJson['key'];
                         emailLostForm['authCode'].focus();
                         alert('5분 안에 적어주세요');
+                        alert(respJson['code']);
                         break;
                     default :
                         alert('입력하신 정보와 일치하는 계정이 없습니다.');
@@ -44,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             emailLostForm.onsubmit = () => {
                 const callback = (resp) => {
-                    const respJson = new JSON.parse(resp);
+                    const respJson = JSON.parse(resp);
                     const email = respJson['email'];
                     if (email === '') {
                         alert('인증번호가 올바르지 않습니다.')

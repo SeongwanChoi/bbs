@@ -10,6 +10,7 @@ public class Lost_emailSendCodeVo {
     private final String contactSecond;
     private final String contactThird;
 
+    private String code;
     private String key;
     private String ip;
     private Lost_emailSendCodeResult result;
@@ -69,5 +70,13 @@ public class Lost_emailSendCodeVo {
 
     public void setResult(Lost_emailSendCodeResult result) {
         this.result = result;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

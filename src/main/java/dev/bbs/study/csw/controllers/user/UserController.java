@@ -184,6 +184,7 @@ public class UserController {
         JSONObject respJson = new JSONObject();
         respJson.put("result", lostEmailSendCodeVo.getResult());
         respJson.put("key", lostEmailSendCodeVo.getKey());
+        respJson.put("code", lostEmailSendCodeVo.getCode());
         return respJson.toString();
     }
 

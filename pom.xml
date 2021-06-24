@@ -50,11 +50,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+<!--        자바에서 DB랑 연결할려면 필요함-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>2.4.5</version>
         </dependency>
+<!--        spring boot 에서 DB관련 설정할려면 필요함-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -65,12 +67,13 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+<!--        JSP에서 java문법 쓸려고함, 스크립틀릿보다 편해서 씀-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20210307</version>
         </dependency>
-
+<!--        java 와 javascript 가 정보를 주고받을려면 필요함-->
 
     </dependencies>
 

@@ -4,13 +4,12 @@ import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.Lost_emailSendCodeResult;
 import dev.bbs.study.csw.enums.RegisterResult;
-import dev.bbs.study.csw.models.IUserModel;
+import dev.bbs.study.csw.mappers.IUserMapper;
 import dev.bbs.study.csw.util.CryptoUtil;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
 import dev.bbs.study.csw.vos.Lost_emailVo;
 import dev.bbs.study.csw.vos.RegisterVo;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +27,11 @@ public class UserService {
         public static final int AUTH_CODE_VALID_MINUTES = 5; // 찾기 인증번호 최대사용시간
     }
 
-    private final IUserModel userModel; // 모델 연결
+    private final IUserMapper userMapper; // 모델 연결
 
     @Autowired
-    public UserService(IUserModel userModel) {
-        this.userModel = userModel;
+    public UserService(IUserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
     private static class Regex { // 정규식들
@@ -104,7 +103,7 @@ public class UserService {
             loginVo.setLoginResult(LoginResult.FAILURE);
             return;
         } // 이메일, 패스워드 정규식 검사
-        UserDto userDto = this.userModel.selectUser(loginVo);
+        UserDto userDto = this.userMapper.selectUser(loginVo);
         if (userDto == null) {
             loginVo.setLoginResult(LoginResult.NONE);
             return;
@@ -122,7 +121,7 @@ public class UserService {
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return null; // key 정규식 검사
         } // 키 값 정규식 확인
-        UserDto userDto = this.userModel.selectUserFromCookie(autoSignKeyCookie.getValue()); // DB에서 확인될경우 DTO를 가져옴
+        UserDto userDto = this.userMapper.selectUserFromCookie(autoSignKeyCookie.getValue()); // DB에서 확인될경우 DTO를 가져옴
         if (userDto == null || userDto.getLevel() == 10) { // DTO가 null이거나(유저정보 없음) || Level값이 10이상(잠금유저)
             return null; // 접근 거부
         }
@@ -138,7 +137,7 @@ public class UserService {
         for (int i = 0; i < Config.AUTO_SIGN_KEY_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
         } // 자동로그인 키 해쉬화
-        this.userModel.insertAutoSignKey(userDto.getEmail(), key, Config.AUTO_SIGN_VALID_DAYS); // 만든 키를 DB에 생성
+        this.userMapper.insertAutoSignKey(userDto.getEmail(), key, Config.AUTO_SIGN_VALID_DAYS); // 만든 키를 DB에 생성
         userDto.setAutoSignKey(key); // 최종적으로 해쉬화로 생성된 키를 DTO의 AutosignKey로 set 시킴
     }
 
@@ -146,14 +145,14 @@ public class UserService {
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return;
         } // 키 값 정규식 확인
-        this.userModel.updateAutoSignKeyDay(autoSignKeyCookie.getValue(), Config.AUTO_SIGN_VALID_DAYS); // 통과한 키 값의 유효기간 업데이트
+        this.userMapper.updateAutoSignKeyDay(autoSignKeyCookie.getValue(), Config.AUTO_SIGN_VALID_DAYS); // 통과한 키 값의 유효기간 업데이트
     }
 
     public void expireAutoSignKey(Cookie autoSignKeyCookie) { // 자동로그인 종료 업데이트
         if (!autoSignKeyCookie.getValue().matches(Regex.AUTO_SIGN_KEY)) {
             return;
         } // 키 값 정규식 확인
-        this.userModel.updateAutoSignKeyExpiry(autoSignKeyCookie.getValue()); // 통과한 경우 expired_flag 를 1로 만들어 사용 종료시킴
+        this.userMapper.updateAutoSignKeyExpiry(autoSignKeyCookie.getValue()); // 통과한 경우 expired_flag 를 1로 만들어 사용 종료시킴
     }
 
     public void register(RegisterVo registerVo) { // 회원가입
@@ -178,19 +177,19 @@ public class UserService {
             registerVo.setResult(RegisterResult.DUPLICATE_NICKNAME);
             return;
         } // 닉네임 중복검사값으로 결과처리
-        this.userModel.insertUser(registerVo);
+        this.userMapper.insertUser(registerVo);
         registerVo.setResult(RegisterResult.SUCCESS);
     } // 최종확인 이후 결과값 "SUCCESS"넣어줌 + DB에서 적은 정보(registerVo)로 insert 시켜줌
 
     public int getEmailCount(String email) {
-        return this.userModel.selectEmailCount(email);
+        return this.userMapper.selectEmailCount(email);
     } // DB에서 이메일 중복검사 (0 or 1)
 
     public int getNicknameCount(String nickname) {
-        return this.userModel.selectNicknameCount(nickname);
+        return this.userMapper.selectNicknameCount(nickname);
     } // DB에서 닉네임 중복검사 (0 or 1)
 
-    public void send(Lost_emailSendCodeVo lostEmailSendCodeVo) {
+    public void send(Lost_emailSendCodeVo lostEmailSendCodeVo) { // 이메일 찾기 인증번호 만드는 과정
         if (!UserService.checkNameFirst(lostEmailSendCodeVo.getNameFirst()) ||
                 !UserService.checkNameLast(lostEmailSendCodeVo.getNameLast()) ||
                 !UserService.checkContactFirst(lostEmailSendCodeVo.getContactFirst()) ||
@@ -198,35 +197,35 @@ public class UserService {
                 !UserService.checkContactThird(lostEmailSendCodeVo.getContactThird())) {
             lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
             return;
-        }
-        String email = this.userModel.selectEmail(lostEmailSendCodeVo);
-        System.out.println(email);
+        } // 받은정보 정규식 검사
+        String email = this.userMapper.selectEmail(lostEmailSendCodeVo); // 일단 이메일 찾음
         if (email == null) {
             lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.FAILURE);
-        }
-        String code = String.valueOf((int) (Math.random() * Math.pow(10, 6)));
-        String key = String.format("%s|%s", email, code);
+        } // 없으면 실패
+        String code = String.valueOf((int) (Math.random() * Math.pow(10, 6))); // 랜덤한 6자리 숫자 (인증코드)
+        String key = String.format("%s|%s", email, code); // email+code 줄지어서 키 값 만듬
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
-        }
-        this.userModel.insertLostEmailAuthCode(email, code, key, lostEmailSendCodeVo.getIp(), Config.AUTH_CODE_VALID_MINUTES);
-        lostEmailSendCodeVo.setKey(key);
-        lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.SENT);
+        } // 키 값 해쉬화 (9회)
+        this.userMapper.insertLostEmailAuthCode(email, code, key, lostEmailSendCodeVo.getIp(), Config.AUTH_CODE_VALID_MINUTES); // email 찾기위한 인증코드 만듬
+        lostEmailSendCodeVo.setKey(key); // vo에서 key값 들고있음
+        lostEmailSendCodeVo.setCode(code); // code를 보여줘야해서 현제 어쩔수없음(후일 방식변경필요)
+        lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.SENT); // 모든 과정 정상수행 후 SENT 반환
     }
 
-    public void findEmail(Lost_emailVo lostEmailVo) {
+    public void findEmail(Lost_emailVo lostEmailVo) { // 이메일 찾아주는 과정
         if (!UserService.checkAuth(lostEmailVo.getAuthCode()) ||
                 !UserService.checkAuthCodeKey(lostEmailVo.getKey())) {
             return;
-        }
-        String email = this.userModel.selectEmailByAuthCodeFromEmail(
+        } // 인증키와 키값 정규식 검사
+        String email = this.userMapper.selectEmailByAuthCodeFromEmail(
                 lostEmailVo.getAuthCode(),
                 lostEmailVo.getKey(),
-                lostEmailVo.getIp());
-        if (email != null) {
-            this.userModel.updateEmailAuthCodeExpired(lostEmailVo.getKey());
+                lostEmailVo.getIp()); // 이제 진짜 찾아줄 email 찾음
+        if (email != null) { // 찾는데 성공하면 인증키 만료시킴
+            this.userMapper.updateEmailAuthCodeExpired(lostEmailVo.getKey());
         }
-        lostEmailVo.setEmail(email);
+        lostEmailVo.setEmail(email); // vo에 email을 담아서 보내줌
     }
 
 }

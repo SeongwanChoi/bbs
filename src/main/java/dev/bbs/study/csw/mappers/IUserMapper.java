@@ -1,4 +1,4 @@
-package dev.bbs.study.csw.models;
+package dev.bbs.study.csw.mappers;
 
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.vos.LoginVo;
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface IUserModel {
+public interface IUserMapper {
     int selectEmailCount(@Param("email") String email); // 회원가입 - 이메일 중복검사
 
     int selectNicknameCount(@Param("nickname") String nickname); // 회원가입 - 닉네임 중복검사
@@ -32,7 +32,7 @@ public interface IUserModel {
     void updateAutoSignKeyExpiry(
             @Param("key") String key); // 자동로그인 종료
 
-    String selectEmail(Lost_emailSendCodeVo lostEmailSendCodeVo); // 이메일 찾음(AuthCode로 씀)
+    String selectEmail(Lost_emailSendCodeVo lostEmailSendCodeVo); // 이메일 찾아서(AuthCode로 씀)
 
     void insertLostEmailAuthCode( // 인증키로 이메일 찾음
             @Param("email") String email,

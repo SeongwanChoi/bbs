@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dev.bbs.study.csw.models.IUserModel">
+<mapper namespace="dev.bbs.study.csw.mappers.IUserMapper">
     <insert id="insertUser" parameterType="dev.bbs.study.csw.vos.RegisterVo">
         INSERT INTO `git_bbs`.`users`(`email`, `password`, nickname, `name_first`, `name_optional`, `name_last`,
                                       `contact_first`, `contact_second`, `contact_third`, `address_post`,
@@ -106,13 +106,13 @@
         WHERE `code` = #{authCode}
           AND `key` = #{key}
           AND `ip` = #{ip}
-          AND `expires_at` = NOW()
           AND `expired_flag` = FALSE
     </select>
 
     <update id="updateEmailAuthCodeExpired">
         UPDATE `git_bbs`.`lost_email`
         SET `expired_flag` = TRUE
+        AND `expires_at` = NOW()
         WHERE `key` = #{key}
         LIMIT 1
     </update>
