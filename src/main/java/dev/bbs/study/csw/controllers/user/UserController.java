@@ -180,7 +180,7 @@ public class UserController {
         }
         lostEmailSendCodeVo.setIp(request.getRemoteAddr());
         this.userService.send(lostEmailSendCodeVo);
-        System.out.println(lostEmailSendCodeVo.getResult());
+
         JSONObject respJson = new JSONObject();
         respJson.put("result", lostEmailSendCodeVo.getResult());
         respJson.put("key", lostEmailSendCodeVo.getKey());
