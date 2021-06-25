@@ -188,4 +188,28 @@ public class UserController {
         return respJson.toString();
     }
 
+    @RequestMapping(
+            value ="/lost_password",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public String lostPasswordGet(@ModelAttribute(UserDto.NAME) UserDto userDto) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        return "user/lost_password";
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value ="/lost_password",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostPasswordPost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        return "user/lost_password";
+    }
 }
