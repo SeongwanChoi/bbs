@@ -10,16 +10,20 @@
     <link rel="stylesheet" href="/resource/stylesheets/user/border.css">
     <script src="../resource/scripts/class.ajax.js"></script>
     <script src="../resource/scripts/user/emailLost.js"></script>
-    <title>이메일 찾기</title>
+    <title>비밀번호 찾기</title>
 </head>
 <body>
 <%@ include file="../border.jsp"%>
     <div>
-        <form id="emailLost-Form">
+        <form id="passwordLost-Form">
             <div></div>
             <label>
+                <span hidden>이메일</span>
+                <input autofocus maxlength="50" name="email" type="email" placeholder="이메일" value="${registerVo.email}">
+            </label>
+            <label>
                 <span hidden>이름</span>
-                <input autofocus maxlength="10" name="nameFirst" type="text" placeholder="이름" value="${registerVo.nameFirst}">
+                <input maxlength="10" name="nameFirst" type="text" placeholder="이름" value="${registerVo.nameFirst}">
             </label>
             <label>
                 <span hidden>중간이름</span>
@@ -50,7 +54,7 @@
             </label>
             <input hidden name="key" type="hidden">
             <br>
-            <input hidden name="submit" type="submit" value="이메일 찾기">
+            <input hidden name="submit" type="submit" value="비밀번호 찾기">
         </form>
     </div>
 </body>

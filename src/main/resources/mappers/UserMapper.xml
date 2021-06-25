@@ -111,8 +111,7 @@
 
     <update id="updateEmailAuthCodeExpired">
         UPDATE `git_bbs`.`lost_email`
-        SET `expired_flag` = TRUE
-        AND `expires_at` = NOW()
+        SET `expires_at` = NOW(), `expired_flag` = TRUE
         WHERE `key` = #{key}
         LIMIT 1
     </update>
