@@ -187,7 +187,7 @@ public class UserService {
         return this.userMapper.selectNicknameCount(nickname);
     } // DB에서 닉네임 중복검사 (0 or 1)
 
-    public void sendE (Lost_emailSendCodeVo lostEmailSendCodeVo) { // 이메일 찾기 인증번호 만드는 과정
+    public void sendE (Lost_emailSendCodeVo lostEmailSendCodeVo) { // 이메일 찾기 인증번호 만드는 과정 (1)
         if (!UserService.checkNameFirst(lostEmailSendCodeVo.getNameFirst()) ||
                 !UserService.checkNameLast(lostEmailSendCodeVo.getNameLast()) ||
                 !UserService.checkContactFirst(lostEmailSendCodeVo.getContactFirst()) ||
@@ -211,7 +211,7 @@ public class UserService {
         lostEmailSendCodeVo.setResult(Lost_emailSendCodeResult.SENT); // 모든 과정 정상수행 후 SENT 반환
     }
 
-    public void findEmail(Lost_emailVo lostEmailVo) { // 이메일 찾아주는 과정
+    public void findEmail(Lost_emailVo lostEmailVo) { // 이메일 찾아주는 과정 (2)
         if (!UserService.checkAuth(lostEmailVo.getAuthCode()) ||
                 !UserService.checkAuthCodeKey(lostEmailVo.getKey())) {
             return;
@@ -227,7 +227,7 @@ public class UserService {
         lostEmailVo.setEmail(email); // vo에 email을 담아서 보내줌
     }
 
-    public void sendP (Lost_passwordSendCodeVo lostPasswordSendCodeVo) {
+    public void sendP (Lost_passwordSendCodeVo lostPasswordSendCodeVo) { // 비밀번호 인증코드 만드는과정(1)
         if (!UserService.checkEmail(lostPasswordSendCodeVo.getEmail()) ||
             !UserService.checkNameFirst(lostPasswordSendCodeVo.getNameFirst()) ||
                 !UserService.checkNameLast(lostPasswordSendCodeVo.getNameLast()) ||
@@ -236,15 +236,15 @@ public class UserService {
                 !UserService.checkContactThird(lostPasswordSendCodeVo.getContactThird())) {
             lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
             return;
-        }
-        int count = this.userMapper.selectUserCount(
+        } // 정규식 검사
+        int count = this.userMapper.selectUserCount( // 받은 정보를 토대로 이메일이 존재하는지 확인 (0 or 1)
                 lostPasswordSendCodeVo.getEmail(),
                 lostPasswordSendCodeVo.getNameFirst(),
                 lostPasswordSendCodeVo.getNameLast(),
                 lostPasswordSendCodeVo.getContactFirst(),
                 lostPasswordSendCodeVo.getContactSecond(),
                 lostPasswordSendCodeVo.getContactThird());
-        if (count == 0) {
+        if (count == 0) { // 없으면 실패
             lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
             return;
         }
@@ -259,9 +259,19 @@ public class UserService {
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
             key = CryptoUtil.Sha512.hash(key, null);
         } // 키 값 해쉬화 (9회)
-        lostPasswordSendCodeVo.setCode(code);
-        lostPasswordSendCodeVo.setKey(key);
-        lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.SENT);
+        lostPasswordSendCodeVo.setCode(code); // 만들어진 code 값 넣어줌
+        lostPasswordSendCodeVo.setKey(key); // 만들어진 key 값 넣어줌
+        lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.SENT); // 인증코드 생성 성공결과로 SENT본냄
+    }
+
+    public void newPassword(Lost_passwordVo lostPasswordVo) {
+        if (!UserService.checkEmail(lostPasswordVo.getEmail()) ||
+                !UserService.checkAuth(lostPasswordVo.getAuthCode()) ||
+                !UserService.checkAuthCodeKey(lostPasswordVo.getKey())) {
+            lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
+            return;
+        }
+        String user =
     }
 
 }

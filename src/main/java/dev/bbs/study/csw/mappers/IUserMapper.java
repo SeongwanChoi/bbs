@@ -57,4 +57,10 @@ public interface IUserMapper {
             @Param("contactFirst") String contactFirst,
             @Param("contactSecond") String contactSecond,
             @Param("contactThird") String contactThird);
+
+    int selectEmailByAuthCodeFromPassword(
+            @Param("email") String email,
+            @Param("authCode") String authCode,
+            @Param("key") String key,
+            @Param("ip") String ip);
 }

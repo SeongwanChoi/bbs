@@ -154,8 +154,7 @@ public class UserController {
     public String lostEmailPost(
             @ModelAttribute(UserDto.NAME) UserDto userDto,
             HttpServletRequest request,
-            Lost_emailVo lostEmailVo
-    ) {
+            Lost_emailVo lostEmailVo) {
         if (userDto != null) {
             return "redirect:/";
         }
@@ -194,6 +193,7 @@ public class UserController {
         if (userDto != null) {
             return "redirect:/";
         }
+
         return "user/lost_password";
     }
 
@@ -204,10 +204,13 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public String lostPasswordPost(
             @ModelAttribute(UserDto.NAME) UserDto userDto,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            Lost_passwordVo lostPasswordVo) {
         if (userDto != null) {
             return "redirect:/";
         }
+        lostPasswordVo.setIp(request.getRemoteAddr());
+        this.userService.
         return "user/lost_password";
     }
 
