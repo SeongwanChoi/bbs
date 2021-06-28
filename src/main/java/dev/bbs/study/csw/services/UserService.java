@@ -3,13 +3,11 @@ package dev.bbs.study.csw.services;
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.enums.LoginResult;
 import dev.bbs.study.csw.enums.Lost_emailSendCodeResult;
+import dev.bbs.study.csw.enums.Lost_passwordSendCodeResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.mappers.IUserMapper;
 import dev.bbs.study.csw.util.CryptoUtil;
-import dev.bbs.study.csw.vos.LoginVo;
-import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
-import dev.bbs.study.csw.vos.Lost_emailVo;
-import dev.bbs.study.csw.vos.RegisterVo;
+import dev.bbs.study.csw.vos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -189,7 +187,7 @@ public class UserService {
         return this.userMapper.selectNicknameCount(nickname);
     } // DB에서 닉네임 중복검사 (0 or 1)
 
-    public void send(Lost_emailSendCodeVo lostEmailSendCodeVo) { // 이메일 찾기 인증번호 만드는 과정
+    public void sendE (Lost_emailSendCodeVo lostEmailSendCodeVo) { // 이메일 찾기 인증번호 만드는 과정
         if (!UserService.checkNameFirst(lostEmailSendCodeVo.getNameFirst()) ||
                 !UserService.checkNameLast(lostEmailSendCodeVo.getNameLast()) ||
                 !UserService.checkContactFirst(lostEmailSendCodeVo.getContactFirst()) ||
@@ -227,6 +225,43 @@ public class UserService {
         }
         System.out.println(email);
         lostEmailVo.setEmail(email); // vo에 email을 담아서 보내줌
+    }
+
+    public void sendP (Lost_passwordSendCodeVo lostPasswordSendCodeVo) {
+        if (!UserService.checkEmail(lostPasswordSendCodeVo.getEmail()) ||
+            !UserService.checkNameFirst(lostPasswordSendCodeVo.getNameFirst()) ||
+                !UserService.checkNameLast(lostPasswordSendCodeVo.getNameLast()) ||
+                !UserService.checkContactFirst(lostPasswordSendCodeVo.getContactFirst()) ||
+                !UserService.checkContactSecond(lostPasswordSendCodeVo.getContactSecond()) ||
+                !UserService.checkContactThird(lostPasswordSendCodeVo.getContactThird())) {
+            lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
+            return;
+        }
+        int count = this.userMapper.selectUserCount(
+                lostPasswordSendCodeVo.getEmail(),
+                lostPasswordSendCodeVo.getNameFirst(),
+                lostPasswordSendCodeVo.getNameLast(),
+                lostPasswordSendCodeVo.getContactFirst(),
+                lostPasswordSendCodeVo.getContactSecond(),
+                lostPasswordSendCodeVo.getContactThird());
+        if (count == 0) {
+            lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
+            return;
+        }
+        String code = String.valueOf((int) (Math.random() * Math.pow(10, 6))); // 랜덤한 6자리 숫자 (인증코드)
+        String key = String.format("%s|%s%s%s|%s%f",
+                lostPasswordSendCodeVo.getEmail(),
+                lostPasswordSendCodeVo.getContactFirst(),
+                lostPasswordSendCodeVo.getContactSecond(),
+                lostPasswordSendCodeVo.getContactThird(),
+                code,
+                Math.random()); // 키 값 만듬
+        for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
+            key = CryptoUtil.Sha512.hash(key, null);
+        } // 키 값 해쉬화 (9회)
+        lostPasswordSendCodeVo.setCode(code);
+        lostPasswordSendCodeVo.setKey(key);
+        lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.SENT);
     }
 
 }

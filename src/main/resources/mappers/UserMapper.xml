@@ -111,8 +111,19 @@
 
     <update id="updateEmailAuthCodeExpired">
         UPDATE `git_bbs`.`lost_email`
-        SET `expires_at` = NOW(), `expired_flag` = TRUE
-        WHERE `key` = #{key}
-        LIMIT 1
+        SET `expires_at`   = NOW(),
+            `expired_flag` = TRUE
+        WHERE `key` = #{key} LIMIT 1
     </update>
+
+    <select id="selectUserCount" resultType="_int">
+        SELECT COUNT(`index`)
+        FROM `git_bbs`.`users`
+        WHERE `email` = #{email}
+          AND `nameFirst` = #{nameFirst}
+          AND `nameLast` = #{nameLast}
+          AND `contactFirst` = #{contactFirst}
+          AND `contactSecond` = #{contactSecond}
+          AND `contactThrid` = #{contactThrid}
+    </select>
 </mapper>

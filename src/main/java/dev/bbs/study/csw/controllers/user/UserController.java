@@ -2,12 +2,10 @@ package dev.bbs.study.csw.controllers.user;
 
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.enums.LoginResult;
+import dev.bbs.study.csw.enums.Lost_passwordSendCodeResult;
 import dev.bbs.study.csw.enums.RegisterResult;
 import dev.bbs.study.csw.services.UserService;
-import dev.bbs.study.csw.vos.LoginVo;
-import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
-import dev.bbs.study.csw.vos.Lost_emailVo;
-import dev.bbs.study.csw.vos.RegisterVo;
+import dev.bbs.study.csw.vos.*;
 import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,7 +177,7 @@ public class UserController {
             return "redirect:/";
         }
         lostEmailSendCodeVo.setIp(request.getRemoteAddr());
-        this.userService.send(lostEmailSendCodeVo);
+        this.userService.sendE(lostEmailSendCodeVo);
 
         JSONObject respJson = new JSONObject();
         respJson.put("result", lostEmailSendCodeVo.getResult());
@@ -211,5 +209,28 @@ public class UserController {
             return "redirect:/";
         }
         return "user/lost_password";
+    }
+
+    @ResponseBody
+    @RequestMapping(
+            value ="/lost_password/send-code",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String lostPasswordSendCodePost(
+            @ModelAttribute(UserDto.NAME) UserDto userDto,
+            HttpServletRequest request,
+            Lost_passwordSendCodeVo lostPasswordSendCodeVo) {
+        if (userDto != null) {
+            return "redirect:/";
+        }
+        lostPasswordSendCodeVo.setIp(request.getRemoteAddr());
+        this.userService.sendP(lostPasswordSendCodeVo);
+
+        JSONObject respJson = new JSONObject();
+        respJson.put("result", lostPasswordSendCodeVo.getResult());
+        if (lostPasswordSendCodeVo.getResult() == Lost_passwordSendCodeResult.SENT) {
+            respJson.put("key", lostPasswordSendCodeVo.getKey());
+        }
+        return respJson.toString();
     }
 }
