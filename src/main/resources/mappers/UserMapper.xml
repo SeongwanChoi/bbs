@@ -129,8 +129,10 @@
 
     <select id="selectEmailByAuthCodeFromPassword" resultType="_int">
         SELECT COUNT(`index`)
-FROM `git_bbs`.`users`
-WHERE `email` = #{email}
-AND `code` = #{authcode}
+        FROM `git_bbs`.`lost_password`
+        WHERE `email` = #{email}
+          AND `code` = #{authcode}
+          AND `ip` = #{ip}
+          AND `key` = #{key}
     </select>
 </mapper>

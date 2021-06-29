@@ -210,7 +210,7 @@ public class UserController {
             return "redirect:/";
         }
         lostPasswordVo.setIp(request.getRemoteAddr());
-        this.userService.
+
         return "user/lost_password";
     }
 

@@ -5,7 +5,7 @@ import dev.bbs.study.csw.util.CryptoUtil;
 
 public class RegisterVo {
     private final String email;
-    private final String password;
+    private  String password;
     private final String nickname;
     private final String nameFirst;
     private final String nameOptional;
@@ -16,7 +16,7 @@ public class RegisterVo {
     private final String addressPost;
     private final String addressPrimary;
     private final String addressSecondary;
-    private final String hashedPassword;
+    private  String hashedPassword;
 
 
     private RegisterResult result;
@@ -26,7 +26,7 @@ public class RegisterVo {
                       String contactThird, String addressPost, String addressPrimary,
                       String addressSecondary) {
         this.email = email;
-        this.password = password;
+        this.setPassword(password);
         this.nickname = nickname;
         this.nameFirst = nameFirst;
         this.nameOptional = nameOptional;
@@ -37,7 +37,6 @@ public class RegisterVo {
         this.addressPost = addressPost;
         this.addressPrimary = addressPrimary;
         this.addressSecondary = addressSecondary;
-        this.hashedPassword = CryptoUtil.Sha512.hash(password, null);
     }
 
     public String getEmail() {
@@ -46,6 +45,11 @@ public class RegisterVo {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        this.hashedPassword = CryptoUtil.Sha512.hash(password);
     }
 
     public String getNickname() {

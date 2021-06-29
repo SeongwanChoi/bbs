@@ -271,7 +271,11 @@ public class UserService {
             lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
             return;
         }
-        String user =
+        int key = this.userMapper.selectEmailByAuthCodeFromPassword(
+                lostPasswordVo.getEmail(),
+                lostPasswordVo.getAuthCode(),
+                lostPasswordVo.getKey(),
+                lostPasswordVo.getIp());
     }
 
 }
