@@ -2,13 +2,14 @@ package dev.bbs.study.csw.vos;
 
 import dev.bbs.study.csw.enums.Lost_emailSendCodeResult;
 import dev.bbs.study.csw.enums.Lost_passwordSendCodeResult;
+import dev.bbs.study.csw.util.CryptoUtil;
 
 public class Lost_passwordVo {
     private final String email;
     private final String authCode;
     private final String key;
-    private final String password;
-    private final String hashedPassword;
+    private  String password;
+    private  String hashedPassword;
 
     private String ip;
     private Lost_passwordSendCodeResult result;
@@ -17,8 +18,7 @@ public class Lost_passwordVo {
         this.email = email;
         this.authCode = authCode;
         this.key = key;
-        this.password = password;
-        this.hashedPassword = hashedPassword;
+        this.setPassword(password);
     }
 
     public String getEmail() {
@@ -35,6 +35,11 @@ public class Lost_passwordVo {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        this.hashedPassword = CryptoUtil.Sha512.hash(password);
     }
 
     public String getHashedPassword() {

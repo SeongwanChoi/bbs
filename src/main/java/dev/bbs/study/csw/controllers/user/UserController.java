@@ -210,8 +210,11 @@ public class UserController {
             return "redirect:/";
         }
         lostPasswordVo.setIp(request.getRemoteAddr());
+        this.userService.newPassword(lostPasswordVo);
 
-        return "user/lost_password";
+        JSONObject respJson = new JSONObject();
+        respJson.put("result", lostPasswordVo.getResult());
+        return respJson.toString();
     }
 
     @ResponseBody

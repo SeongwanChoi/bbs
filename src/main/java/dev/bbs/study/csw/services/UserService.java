@@ -133,7 +133,7 @@ public class UserService {
                 new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date()),
                 Math.random()); // 자동로그인 키 생성
         for (int i = 0; i < Config.AUTO_SIGN_KEY_HASH_COUNT; i++) {
-            key = CryptoUtil.Sha512.hash(key, null);
+            key = CryptoUtil.Sha512.hash(key);
         } // 자동로그인 키 해쉬화
         this.userMapper.insertAutoSignKey(userDto.getEmail(), key, Config.AUTO_SIGN_VALID_DAYS); // 만든 키를 DB에 생성
         userDto.setAutoSignKey(key); // 최종적으로 해쉬화로 생성된 키를 DTO의 AutosignKey로 set 시킴
@@ -203,7 +203,7 @@ public class UserService {
         String code = String.valueOf((int) (Math.random() * Math.pow(10, 6))); // 랜덤한 6자리 숫자 (인증코드)
         String key = String.format("%s|%s", email, code); // email+code 줄지어서 키 값 만듬
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
-            key = CryptoUtil.Sha512.hash(key, null);
+            key = CryptoUtil.Sha512.hash(key);
         } // 키 값 해쉬화 (9회)
         this.userMapper.insertLostEmailAuthCode(email, code, key, lostEmailSendCodeVo.getIp(), Config.AUTH_CODE_VALID_MINUTES); // email 찾기위한 인증코드 만듬
         lostEmailSendCodeVo.setKey(key); // vo에서 key값 들고있음
@@ -257,7 +257,7 @@ public class UserService {
                 code,
                 Math.random()); // 키 값 만듬
         for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
-            key = CryptoUtil.Sha512.hash(key, null);
+            key = CryptoUtil.Sha512.hash(key);
         } // 키 값 해쉬화 (9회)
         lostPasswordSendCodeVo.setCode(code); // 만들어진 code 값 넣어줌
         lostPasswordSendCodeVo.setKey(key); // 만들어진 key 값 넣어줌
@@ -271,11 +271,17 @@ public class UserService {
             lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
             return;
         }
-        int key = this.userMapper.selectEmailByAuthCodeFromPassword(
+        String email = this.userMapper.selectEmailByAuthCodeFromPassword(
                 lostPasswordVo.getEmail(),
                 lostPasswordVo.getAuthCode(),
                 lostPasswordVo.getKey(),
                 lostPasswordVo.getIp());
+        if (email == null) {
+            lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
+        }
+        this.userMapper.updatePasswordAuthCodeExpired(lostPasswordVo.getKey());
+        this.userMapper.updateUserPassword(email, lostPasswordVo.getHashedPassword());
+        lostPasswordVo.setResult(Lost_passwordSendCodeResult.SUCCESS);
     }
 
 }

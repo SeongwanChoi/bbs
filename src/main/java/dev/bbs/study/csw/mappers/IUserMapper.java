@@ -58,9 +58,16 @@ public interface IUserMapper {
             @Param("contactSecond") String contactSecond,
             @Param("contactThird") String contactThird);
 
-    int selectEmailByAuthCodeFromPassword(
+     String selectEmailByAuthCodeFromPassword( // passwordAuthCode 일치여부 확인
             @Param("email") String email,
             @Param("authCode") String authCode,
             @Param("key") String key,
             @Param("ip") String ip);
+
+    void updatePasswordAuthCodeExpired(
+            @Param("key") String key);
+
+    void updateUserPassword(
+            @Param("email") String email,
+            @Param("password") String password);
 }

@@ -135,4 +135,16 @@
           AND `ip` = #{ip}
           AND `key` = #{key}
     </select>
+
+    <update id="updatePasswordAuthCodeExpired">
+        UPDATE `git_bbs`.`lost_password`
+        SET `expired_flag` = TRUE
+        WHERE `key` = #{key} LIMIT 1
+    </update>
+
+    <update id="updateUserPassword">
+        UPDATE `git_bbs`.`users`
+        SET `password` = #{password}
+        WHERE `email` = #{email} LIMIT 1
+    </update>
 </mapper>

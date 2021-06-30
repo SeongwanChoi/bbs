@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/border.css">
     <script src="../resource/scripts/class.ajax.js"></script>
-    <script src="../resource/scripts/user/emailLost.js"></script>
+    <script src="../resource/scripts/user/passwordLost.js"></script>
     <title>비밀번호 찾기</title>
 </head>
 <body>
@@ -51,6 +51,16 @@
             <label hidden rel="authCode">
                 <span hidden >인증코드</span>
                 <input maxlength="6" name="authCode" type="number" placeholder="인증코드">
+            </label>
+            <br>
+            <label hidden rel="password">
+                <span hidden>비밀번호</span>
+                <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${registerVo.password}">
+            </label>
+            <br>
+            <label hidden rel="passwordCheck">
+                <span hidden>비밀번호 재입력</span>
+                <input maxlength="128" name="passwordCheck" type="password" placeholder="비밀번호 재입력">
             </label>
             <input hidden name="key" type="hidden">
             <br>

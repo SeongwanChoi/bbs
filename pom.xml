@@ -28,6 +28,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
+<!--            views 단에서 변경할때마다 서버 재시작 안해도됨-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
