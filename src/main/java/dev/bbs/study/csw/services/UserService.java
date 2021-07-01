@@ -97,7 +97,7 @@ public class UserService {
             return;
         } // 패스워드 공백확인
         if (!UserService.checkEmail(loginVo.getEmail()) ||
-            !UserService.checkPassword(loginVo.getPassword())) {
+                !UserService.checkPassword(loginVo.getPassword())) {
             loginVo.setLoginResult(LoginResult.FAILURE);
             return;
         } // 이메일, 패스워드 정규식 검사
@@ -229,7 +229,7 @@ public class UserService {
 
     public void sendP (Lost_passwordSendCodeVo lostPasswordSendCodeVo) { // 비밀번호 인증코드 만드는과정(1)
         if (!UserService.checkEmail(lostPasswordSendCodeVo.getEmail()) ||
-            !UserService.checkNameFirst(lostPasswordSendCodeVo.getNameFirst()) ||
+                !UserService.checkNameFirst(lostPasswordSendCodeVo.getNameFirst()) ||
                 !UserService.checkNameLast(lostPasswordSendCodeVo.getNameLast()) ||
                 !UserService.checkContactFirst(lostPasswordSendCodeVo.getContactFirst()) ||
                 !UserService.checkContactSecond(lostPasswordSendCodeVo.getContactSecond()) ||

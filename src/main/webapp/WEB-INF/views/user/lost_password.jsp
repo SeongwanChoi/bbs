@@ -53,6 +53,8 @@
                 <input maxlength="6" name="authCode" type="number" placeholder="인증코드">
             </label>
             <br>
+            <input hidden name="코드확인" type="button" value="코드 확인">
+            <br>
             <label hidden rel="password">
                 <span hidden>비밀번호</span>
                 <input maxlength="128" name="password" type="password" placeholder="비밀번호" value="${registerVo.password}">
