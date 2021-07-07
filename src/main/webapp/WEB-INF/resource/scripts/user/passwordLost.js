@@ -6,8 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 case 'SENT' :
                     lostPasswordForm.querySelectorAll('input').forEach(input => {
                         if (input.getAttribute('name') !== 'authCode' &&
-                            input.getAttribute('name') !== 'password' &&
-                            input.getAttribute('name') !== 'passwordCheck' &&
                             input.getAttribute('name') !== 'submit') {
                             input.setAttribute('disabled', 'disabled');
                         }

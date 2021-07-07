@@ -30,11 +30,13 @@
             <optional>true</optional>
 <!--            views 단에서 변경할때마다 서버 재시작 안해도됨-->
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
+<!--        tomcat 서버(servlet 실행서버) 사용-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -47,6 +49,13 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>9.0.45</version>
         </dependency>
+<!--        1)스프링 부트 앱에는 톰캣 서버가 내장되어 있다. (바꿀려면 바꿀수도 있음)
+            2)톰캣 서버는 servlet container 이다.
+            3)톰캣 서버는 servlet을 실행하는 서버이다.
+            4)톰캣에서 JSP 파일은, 먼저 servlet이로 변환(컴파일)된 후 실행된다.
+            5)tomcat-embed-jasper는 JSP 파일을 servlet으로 변환하는 컴파일러이다.
+            6)이 것을 프로젝트에 추가하지 않고 실행하면, JSP 파일이 실행되지 않고, 웹브라우저에서 다운로드 될 것이다.
+            7)톰캣은 servlet만 실행할뿐, 다른 파일들은 웹브라우저로 그대로 전송하기 때문이다-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -57,18 +66,19 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>2.4.5</version>
         </dependency>
-<!--        spring boot 에서 DB관련 설정할려면 필요함-->
+<!--        spring boot 에서 DB에 접근할려고 씀-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.4</version>
         </dependency>
+<!--        mapper 쓸려고 받음-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-<!--        JSP에서 java문법 쓸려고함, 스크립틀릿보다 편해서 씀-->
+<!--        JSP 에서 java 문법 쓸려고함, 스크립틀릿보다 편해서 씀-->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>

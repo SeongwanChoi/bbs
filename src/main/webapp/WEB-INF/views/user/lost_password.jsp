@@ -66,7 +66,7 @@
             </label>
             <input hidden name="key" type="hidden">
             <br>
-            <input hidden name="submit" type="submit" value="비밀번호 찾기">
+            <input hidden name="submit" type="submit" value="비밀번호 변경">
         </form>
     </div>
 </body>
