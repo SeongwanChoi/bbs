@@ -1,0 +1,33 @@
+MyBatis란?
+ -  자바 Object와 SQL문 사이의 자동 Mapping기능 지원하는 ORM프레임워크
+ - SQL을 별도의 파일로 분리해서 관리할수 있음
+ - 객체-SQL 사이의 파라미터 Mapping 작업을 자동으로 해줌
+ - SQL문 그대로 이용하면서 JDBC 코드작성의 불편함 제거
+ - 도메인 객체, VO객체를 중심으로 개발 가능
+
+MyBatis 특징
+
+쉬운 접근성과 코드의 간결함
+ - JDBC의 모든기능을 MyBatis가 대부분 제공함
+ - 복잡한 JDBC코드는 때어내서 SQL구문만 있어 보기편함
+ - 수동적 파라미터 설정, 쿼리결과에 대한 맵핑 제거
+
+
+SQL코드와 프로그래밍코드의 분리
+ - SQL에 변경이 있을 때마다 자바코드 수정, 컴파일 X
+ - 보다 더 다양한 사람이(DBA) SQL작성, 관리검토 가능
+
+MyBatis 에서 Mapper인터페이스의 존재 유무
+
+없을경우
+ - SqlSession을 등록해줘야 한다.
+ - DAO인터페이스와 인터페이스를 구현한 DAO클래스를 생성해줘야한다.
+ - Mapper인터페이스를 사용하지 않았을 때는 네임스페이스 + “.” + SQL ID로 지정해서 SQL을 호출해야한다.(예를들면 sesseion.selectOne(“com.test.mapper.TimeMapper.getReplyer, bno ))
+ - selectOne, insert, delete 등 제공하는 메소드를 사용해야 한다.
+ - 문자열로 작성하기 때문에 버그가 생길 수 있다.
+ - IDE에서 제공하는 code assist를 사용할 수 없다 
+
+사용방법
+ - Mapper인터페이스는 개발자가 직접 작성한다.
+ - mapper 네임스페이스는 패키지명을 포함한 인터페이스 명으로 작성한다.
+ - SQL id는 인터페이스에 정의된 메서드명과 동일하게 작성한다
