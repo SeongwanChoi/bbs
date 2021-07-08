@@ -15,6 +15,7 @@ public class RootController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public String indexGet() {
+        System.out.println();
         return "index";
     }
 }

@@ -6,8 +6,8 @@ import dev.bbs.study.csw.util.CryptoUtil;
 
 public class LoginVo {
     private final String email;
-    private final String password;
-    private final String hashedPassword;
+    private String password;
+    private String hashedPassword;
 
     private boolean autoSign;
     private LoginResult loginResult;
@@ -15,8 +15,7 @@ public class LoginVo {
 
     public LoginVo(String email, String password) {
         this.email = email;
-        this.password = password;
-        this.hashedPassword = CryptoUtil.Sha512.hash(password, null);
+        setPassword(password);
     }
 
     public String getEmail() {
@@ -25,6 +24,11 @@ public class LoginVo {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        this.hashedPassword = CryptoUtil.Sha512.hash(password);
     }
 
     public String getHashedPassword() {

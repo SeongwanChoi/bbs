@@ -17,7 +17,7 @@
 </head>
 <body class="login">
 <%@ include file="../border.jsp"%>
-<form method="post" action="/user/login">
+<form method="post">
     <div class="title">
         <a class="login-text" href="login" target="_self">LOGIN</a>
         <span class="login-welcome">WELCOME BACK</span>

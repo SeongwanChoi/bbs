@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.bbs.study.csw.mappers.IUserMapper">
     <insert id="insertUser" parameterType="dev.bbs.study.csw.vos.RegisterVo">
-        INSERT INTO `git_bbs`.`users`(`email`, `password`, nickname, `name_first`, `name_optional`, `name_last`,
+        INSERT INTO `git_bbs`.`users`(`email`, `password`, `nickname`, `name_first`, `name_optional`, `name_last`,
                                       `contact_first`, `contact_second`, `contact_third`, `address_post`,
                                       `address_primary`, `address_secondary`)
         VALUES (#{email}, #{hashedPassword}, #{nickname}, #{nameFirst}, #{nameOptional}, #{nameLast},

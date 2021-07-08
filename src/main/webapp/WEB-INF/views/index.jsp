@@ -30,8 +30,8 @@
                         <span>접속할려면 로그인하세요</span>
                         <a class="loginButton" href="/user/login">로그인</a>
                         <div>
-                            <a>아이디</a>
-                            <a>비밀번호 찾기</a>
+                            <a href="/user/lost_email">아이디</a>
+                            <a href="/user/lost_password">비밀번호 찾기</a>
                             <a class="register" href="/user/register">회원가입</a>
                         </div>
                     </div>

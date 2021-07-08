@@ -15,6 +15,7 @@
     <script src="/resource/scripts/user/register.js"></script>
 </head>
 <body class="register">
+<%@ include file="../border.jsp"%>
 <form action="/user/register" id="register-form" method="post">
     <label>
         <span hidden>이메일</span>

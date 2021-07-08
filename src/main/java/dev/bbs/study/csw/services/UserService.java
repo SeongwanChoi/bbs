@@ -67,7 +67,7 @@ public class UserService {
         return contactFirst.matches(Regex.CONTACT_FIRST);
     }
     public static boolean checkContactSecond(String contactSecond) {
-        return contactSecond.matches(Regex.CONTACT_SECOND);
+        return contactSecond != null && contactSecond.matches(Regex.CONTACT_SECOND);
     }
     public static boolean checkContactThird(String contactThird) {
         return contactThird.matches(Regex.CONTACT_THIRD);
@@ -237,7 +237,7 @@ public class UserService {
             lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
             return;
         } // 정규식 검사
-        int count = this.userMapper.selectUserCount( // 받은 정보를 토대로 이메일이 존재하는지 확인 (0 or 1)
+        int count = this.userMapper.selectUserCount( // 결과를받아서 이메일이 존재하는지 확인 (0 or 1)
                 lostPasswordSendCodeVo.getEmail(),
                 lostPasswordSendCodeVo.getNameFirst(),
                 lostPasswordSendCodeVo.getNameLast(),

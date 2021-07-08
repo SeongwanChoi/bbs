@@ -193,7 +193,6 @@ public class UserController {
         if (userDto != null) {
             return "redirect:/";
         }
-
         return "user/lost_password";
     }
 
