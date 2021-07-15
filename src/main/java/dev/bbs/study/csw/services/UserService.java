@@ -223,7 +223,6 @@ public class UserService {
         if (email != null) { // 찾는데 성공하면 인증키 만료시킴
             this.userMapper.updateEmailAuthCodeExpired(lostEmailVo.getKey());
         }
-        System.out.println(email);
         lostEmailVo.setEmail(email); // vo에 email을 담아서 보내줌
     }
 

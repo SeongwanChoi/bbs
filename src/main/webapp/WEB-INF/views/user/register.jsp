@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resource/stylesheets/common.css">
     <link rel="stylesheet" href="/resource/stylesheets/user/register.css">
+    <link rel="stylesheet" href="/resource/stylesheets/user/border.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/resource/scripts/class.ajax.js"></script>
     <script src="/resource/scripts/user/register.js"></script>

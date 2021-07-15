@@ -229,6 +229,9 @@ public class UserController {
             return "redirect:/";
         }
         lostPasswordSendCodeVo.setIp(request.getRemoteAddr());
+        System.out.println(lostPasswordSendCodeVo.getEmail());
+        System.out.println(lostPasswordSendCodeVo.getContactFirst());
+        System.out.println(lostPasswordSendCodeVo.getNameFirst());
         this.userService.sendP(lostPasswordSendCodeVo);
 
         JSONObject respJson = new JSONObject();

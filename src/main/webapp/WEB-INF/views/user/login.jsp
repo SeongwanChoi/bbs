@@ -75,7 +75,7 @@
                 <a href="lost_email">이메일 찾기</a>
             </li>
             <li>
-                <a href="lost_password.jsp">비밀번호 찾기</a>
+                <a href="lost_password">비밀번호 찾기</a>
             </li>
             <li>
                 <a class="login-side" href="register">회원가입</a>

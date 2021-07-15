@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
         const lostPasswordForm = window.document.getElementById('passwordLost-Form');
+        lostPasswordForm['sendCodeButton'].addEventListener('click', () => {
         const callback = (resp) => {
             const respJson = JSON.parse(resp);
             switch (respJson['result']) {
@@ -19,11 +20,13 @@ window.addEventListener('DOMContentLoaded', () => {
                     break;
                 default :
                     alert('입력하신 정보와 일치하는 계정이 없습니다.');
-            }
+                }
+            };
             const fallback = () => {
                 alert('알 수 없는 이유로 동작 중지');
             };
             const formData = new FormData(lostPasswordForm);
             Ajax.request('POST', 'lost_password/send-code', callback, fallback, formData);
-        };
+
+        });
 });

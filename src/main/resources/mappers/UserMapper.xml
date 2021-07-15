@@ -12,13 +12,13 @@
     </insert>
 
     <select id="selectEmailCount" resultType="_int">
-        SELECT COUNT(`index`)
+        SELECT COUNT(0)
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
     </select>
 
     <select id="selectNicknameCount" resultType="_int">
-        SELECT COUNT(`index`)
+        SELECT COUNT(0)
         FROM `git_bbs`.`users`
         WHERE `nickname` = #{nickname}
     </select>
@@ -117,18 +117,18 @@
     </update>
 
     <select id="selectUserCount" resultType="_int">
-        SELECT COUNT(`index`)
+        SELECT COUNT(0)
         FROM `git_bbs`.`users`
         WHERE `email` = #{email}
-          AND `nameFirst` = #{nameFirst}
-          AND `nameLast` = #{nameLast}
-          AND `contactFirst` = #{contactFirst}
-          AND `contactSecond` = #{contactSecond}
-          AND `contactThrid` = #{contactThrid}
+          AND `name_first` = #{nameFirst}
+          AND `name_last` = #{nameLast}
+          AND `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
     </select>
 
     <select id="selectEmailByAuthCodeFromPassword" resultType="_int">
-        SELECT COUNT(`index`)
+        SELECT COUNT(0)
         FROM `git_bbs`.`lost_password`
         WHERE `email` = #{email}
           AND `code` = #{authcode}
