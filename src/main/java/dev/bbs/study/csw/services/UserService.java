@@ -226,61 +226,6 @@ public class UserService {
         lostEmailVo.setEmail(email); // vo에 email을 담아서 보내줌
     }
 
-    public void sendP (Lost_passwordSendCodeVo lostPasswordSendCodeVo) { // 비밀번호 인증코드 만드는과정(1)
-        if (!UserService.checkEmail(lostPasswordSendCodeVo.getEmail()) ||
-                !UserService.checkNameFirst(lostPasswordSendCodeVo.getNameFirst()) ||
-                !UserService.checkNameLast(lostPasswordSendCodeVo.getNameLast()) ||
-                !UserService.checkContactFirst(lostPasswordSendCodeVo.getContactFirst()) ||
-                !UserService.checkContactSecond(lostPasswordSendCodeVo.getContactSecond()) ||
-                !UserService.checkContactThird(lostPasswordSendCodeVo.getContactThird())) {
-            lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
-            return;
-        } // 정규식 검사
-        int count = this.userMapper.selectUserCount( // 결과를받아서 이메일이 존재하는지 확인 (0 or 1)
-                lostPasswordSendCodeVo.getEmail(),
-                lostPasswordSendCodeVo.getNameFirst(),
-                lostPasswordSendCodeVo.getNameLast(),
-                lostPasswordSendCodeVo.getContactFirst(),
-                lostPasswordSendCodeVo.getContactSecond(),
-                lostPasswordSendCodeVo.getContactThird());
-        if (count == 0) { // 없으면 실패
-            lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.FAILURE);
-            return;
-        }
-        String code = String.valueOf((int) (Math.random() * Math.pow(10, 6))); // 랜덤한 6자리 숫자 (인증코드)
-        String key = String.format("%s|%s%s%s|%s%f",
-                lostPasswordSendCodeVo.getEmail(),
-                lostPasswordSendCodeVo.getContactFirst(),
-                lostPasswordSendCodeVo.getContactSecond(),
-                lostPasswordSendCodeVo.getContactThird(),
-                code,
-                Math.random()); // 키 값 만듬
-        for (int i = 0; i < Config.AUTH_CODE_HASH_COUNT; i++) {
-            key = CryptoUtil.Sha512.hash(key);
-        } // 키 값 해쉬화 (9회)
-        lostPasswordSendCodeVo.setCode(code); // 만들어진 code 값 넣어줌
-        lostPasswordSendCodeVo.setKey(key); // 만들어진 key 값 넣어줌
-        lostPasswordSendCodeVo.setResult(Lost_passwordSendCodeResult.SENT); // 인증코드 생성 성공결과로 SENT본냄
-    }
 
-    public void newPassword(Lost_passwordVo lostPasswordVo) {
-        if (!UserService.checkEmail(lostPasswordVo.getEmail()) ||
-                !UserService.checkAuth(lostPasswordVo.getAuthCode()) ||
-                !UserService.checkAuthCodeKey(lostPasswordVo.getKey())) {
-            lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
-            return;
-        }
-        String email = this.userMapper.selectEmailByAuthCodeFromPassword(
-                lostPasswordVo.getEmail(),
-                lostPasswordVo.getAuthCode(),
-                lostPasswordVo.getKey(),
-                lostPasswordVo.getIp());
-        if (email == null) {
-            lostPasswordVo.setResult(Lost_passwordSendCodeResult.FAILURE);
-        }
-        this.userMapper.updatePasswordAuthCodeExpired(lostPasswordVo.getKey());
-        this.userMapper.updateUserPassword(email, lostPasswordVo.getHashedPassword());
-        lostPasswordVo.setResult(Lost_passwordSendCodeResult.SUCCESS);
-    }
 
 }

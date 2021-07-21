@@ -3,7 +3,6 @@ package dev.bbs.study.csw.mappers;
 import dev.bbs.study.csw.dtos.UserDto;
 import dev.bbs.study.csw.vos.LoginVo;
 import dev.bbs.study.csw.vos.Lost_emailSendCodeVo;
-import dev.bbs.study.csw.vos.Lost_passwordSendCodeVo;
 import dev.bbs.study.csw.vos.RegisterVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,24 +49,4 @@ public interface IUserMapper {
     void updateEmailAuthCodeExpired( // 이메일 찾았으면 인증키 비활성화
             @Param("key") String key);
 
-    int selectUserCount(     // 이메일로 계정 존재여부를 찾음
-            @Param("email") String email,
-            @Param("nameFirst") String nameFirst,
-            @Param("nameLast") String nameLast,
-            @Param("contactFirst") String contactFirst,
-            @Param("contactSecond") String contactSecond,
-            @Param("contactThird") String contactThird);
-
-     String selectEmailByAuthCodeFromPassword( // passwordAuthCode 일치여부 확인
-            @Param("email") String email,
-            @Param("authCode") String authCode,
-            @Param("key") String key,
-            @Param("ip") String ip);
-
-    void updatePasswordAuthCodeExpired(
-            @Param("key") String key);
-
-    void updateUserPassword(
-            @Param("email") String email,
-            @Param("password") String password);
 }

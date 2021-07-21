@@ -116,35 +116,5 @@
         WHERE `key` = #{key} LIMIT 1
     </update>
 
-    <select id="selectUserCount" resultType="_int">
-        SELECT COUNT(0)
-        FROM `git_bbs`.`users`
-        WHERE `email` = #{email}
-          AND `name_first` = #{nameFirst}
-          AND `name_last` = #{nameLast}
-          AND `contact_first` = #{contactFirst}
-          AND `contact_second` = #{contactSecond}
-          AND `contact_third` = #{contactThird}
-    </select>
 
-    <select id="selectEmailByAuthCodeFromPassword" resultType="_int">
-        SELECT COUNT(0)
-        FROM `git_bbs`.`lost_password`
-        WHERE `email` = #{email}
-          AND `code` = #{authcode}
-          AND `ip` = #{ip}
-          AND `key` = #{key}
-    </select>
-
-    <update id="updatePasswordAuthCodeExpired">
-        UPDATE `git_bbs`.`lost_password`
-        SET `expired_flag` = TRUE
-        WHERE `key` = #{key} LIMIT 1
-    </update>
-
-    <update id="updateUserPassword">
-        UPDATE `git_bbs`.`users`
-        SET `password` = #{password}
-        WHERE `email` = #{email} LIMIT 1
-    </update>
 </mapper>
